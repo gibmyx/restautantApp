@@ -9,6 +9,7 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "inertiajs/inertia-laravel": "^0.4.3",
+        "lambdish/phunctional": "^2.1",
         "laravel/framework": "^8.65",
         "laravel/jetstream": "^2.4",
         "laravel/sanctum": "^2.11",
@@ -26,6 +27,8 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
+            "AppRestaurant\\": "src/",
+            "Apps\\Backend\\": "apps/backend",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }
