@@ -23,10 +23,13 @@ final class UserAuthApiControllerTest extends TestCase
 
         $response = $this->post('/api/user/auth', [
             "email" => $user->email,
-            'password' => 'password',
+            'password' => 'passworad',
             'token' => Str::random(40),
         ]);
 
+        dd(
+            $response->getContent()
+        );
         $this->assertAuthenticated();
         $response->assertStatus(JsonResponse::HTTP_OK);
     }

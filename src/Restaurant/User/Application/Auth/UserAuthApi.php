@@ -9,6 +9,7 @@ use AppRestaurant\Restaurant\User\Domain\Entity\User;
 use AppRestaurant\Restaurant\User\Domain\Service\UserFinder;
 use AppRestaurant\Restaurant\User\Domain\ValueObject\UserEmail;
 use AppRestaurant\Restaurant\User\Domain\ValueObject\UserPassword;
+use mysql_xdevapi\Exception;
 
 final class UserAuthApi
 {
@@ -35,7 +36,7 @@ final class UserAuthApi
         );
 
         if(false == $auth)
-            $this->notAuth($user);
+            $this->notAuth();
 
         return [
             'user' => [
@@ -46,8 +47,8 @@ final class UserAuthApi
         ];
     }
 
-    private function notAuth(User $user)
+    private function notAuth()
     {
-
+        throw new Exception("Incorrect password");
     }
 }
