@@ -48,6 +48,6 @@ final class UserAuthApi
 
     private function notAuth()
     {
-        throw new \Exception("Incorrect password");
+        throw new \Exception("Incorrect password", 401);
     }
 }

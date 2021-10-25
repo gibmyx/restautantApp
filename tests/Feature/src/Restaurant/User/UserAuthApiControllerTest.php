@@ -23,15 +23,27 @@ final class UserAuthApiControllerTest extends TestCase
 
         $response = $this->post('/api/user/auth', [
             "email" => $user->email,
-            'password' => 'passworad',
+            'password' => 'password',
             'token' => Str::random(40),
         ]);
 
-        dd(
-            $response->getContent()
-        );
         $this->assertAuthenticated();
         $response->assertStatus(JsonResponse::HTTP_OK);
+    }
+    /**
+     * @test
+     */
+    public function this_should_not_authenticar()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->post('/api/user/auth', [
+            "email" => $user->email,
+            'password' => 'passwoord',
+            'token' => Str::random(40),
+        ]);
+
+        $response->assertStatus(JsonResponse::HTTP_UNAUTHORIZED);
     }
 
 }

@@ -33,8 +33,6 @@ final class UserAuthApiController extends Controller
             return response()->json([
                 'code' => $exception->getCode(),
                 'message' => $exception->getMessage(),
-                'line' => $exception->getLine(),
-                'trace' => $exception->getTrace(),
                 'auth' => [
                     'message' => 'Unauthorized'
                 ]
