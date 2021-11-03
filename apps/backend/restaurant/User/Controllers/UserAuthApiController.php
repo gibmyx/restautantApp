@@ -32,20 +32,14 @@ final class UserAuthApiController extends Controller
         } catch (\Exception $exception) {
             return response()->json([
                 'code' => $exception->getCode(),
-                'message' => $exception->getMessage(),
-                'auth' => [
-                    'message' => 'Unauthorized'
-                ]
+                'message' => 'Unauthorized',
             ], $exception->getCode());
         }
 
         return response()->json([
             'code' => JsonResponse::HTTP_OK,
             'message' => 'authenticating',
-            'auth' => [
-                'token' => $request->user()->createToken($request->token)->plainTextToken,
-                'status' => 'authenticating'
-            ],
+            'token' => $request->user()->createToken($request->token)->plainTextToken,
             'user' => $response['user'],
         ], JsonResponse::HTTP_OK);
     }
