@@ -30,7 +30,7 @@ final class UserPostControllers extends Controller
 
     public function __invoke(Request $request)
     {
-        $this->validate($request);
+        $this->validateRequest($request);
         try {
             ($this->create)(new UserCreateRequest(
                 $request->name,
@@ -52,7 +52,7 @@ final class UserPostControllers extends Controller
         ], JsonResponse::HTTP_CREATED);
     }
 
-    private function validate(Request $request)
+    private function validateRequest(Request $request)
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
