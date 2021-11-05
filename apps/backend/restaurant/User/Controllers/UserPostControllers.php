@@ -30,13 +30,7 @@ final class UserPostControllers extends Controller
 
     public function __invoke(Request $request)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', 'min:6'],
-            'password_confirmation' => ['required', 'min:6']
-        ]);
-
+        $this->validate($request);
         try {
             ($this->create)(new UserCreateRequest(
                 $request->name,
@@ -56,6 +50,16 @@ final class UserPostControllers extends Controller
             'code' => JsonResponse::HTTP_CREATED,
             'message' => self::MESSAJE_CREATE,
         ], JsonResponse::HTTP_CREATED);
+    }
+
+    private function validate(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'confirmed', 'min:6'],
+            'password_confirmation' => ['required', 'min:6']
+        ]);
     }
 
 }
