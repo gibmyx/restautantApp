@@ -4,15 +4,19 @@ declare(strict_types=1);
 
 namespace Apps\Backend\restaurant\User\Controllers;
 
+use App\Actions\Fortify\PasswordValidationRules;
 use App\Http\Controllers\Controller;
 use AppRestaurant\Restaurant\User\Application\Create\UserCreate;
 use AppRestaurant\Restaurant\User\Application\Create\UserCreateRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 final class UserPostControllers extends Controller
 {
+    use PasswordValidationRules;
+
     const MESSAJE_CREATE = "User created successfully";
 
     private $create;
@@ -26,6 +30,13 @@ final class UserPostControllers extends Controller
 
     public function __invoke(Request $request)
     {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'confirmed', 'min:6'],
+            'password_confirmation' => ['required', 'min:6']
+        ]);
+
         try {
             ($this->create)(new UserCreateRequest(
                 $request->name,
@@ -38,8 +49,6 @@ final class UserPostControllers extends Controller
             return response()->json([
                 'code' => $exception->getCode(),
                 'message' => $exception->getMessage(),
-                'line' => $exception->getLine(),
-                'trace' => $exception->getTrace(),
             ], JsonResponse::HTTP_BAD_REQUEST);
         }
 

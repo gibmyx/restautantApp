@@ -23,7 +23,7 @@ final class UserPostControllerTest extends TestCase
             "name" => "Gibmyx Gomez",
             "email" => $email,
             'password' => 'password',
-            "password_confirmation" => "123456789"
+            "password_confirmation" => "password"
         ]);
 
         $response->assertStatus(JsonResponse::HTTP_CREATED);
@@ -40,11 +40,26 @@ final class UserPostControllerTest extends TestCase
             "name" => "Gibmyx Gomez",
             "email" => $email,
             'password' => 'password',
-            "password_confirmation" => "123456789"
+            "password_confirmation" => "password"
         ];
-        $this->post('/register', $user);
+        $this->postJson('/register', $user);
 
-        $response = $this->post('/register', $user);
-        $response->assertStatus(JsonResponse::HTTP_BAD_REQUEST);
+        $response = $this->postJson('/register', $user);
+        $response->assertJsonFragment(["email" => ["The email has already been taken."]]);
+    }
+    /**
+     * @test
+     */
+    public function this_should_validate_password_not_confirmation()
+    {
+        $user = [
+            "name" => "Gibmyx Gomez",
+            "email" => "gibmyx@admin.com",
+            'password' => 'password',
+            "password_confirmation" => "passworda"
+        ];
+
+        $response = $this->postJson('/register', $user);
+        $response->assertJsonFragment(["password" => ["The password confirmation does not match."]]);
     }
 }
