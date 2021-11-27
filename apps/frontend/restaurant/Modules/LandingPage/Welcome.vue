@@ -1,7 +1,7 @@
 <template>
     <header-component>
         <template #header_right>
-            <ul  v-if="$page.props.user" class="navbar-nav align-items-lg-center ml-lg-auto">
+            <ul v-if="$page.props.user" class="navbar-nav align-items-lg-center ml-lg-auto">
                 <li class="nav-item">
                     <inertia-link :href="route('dashboard')" class="nav-link">
                         <i class="fas fa-home"></i><span class="nav-link-inner--text">Dashboard</span>
@@ -32,6 +32,14 @@ export default defineComponent({
     name: "Welcome",
 
     props: {},
+
+
+    mounted() {
+        let body = $("body");
+
+        if (!body.hasClass("bg-default"))
+            body.addClass("bg-default");
+    },
 
     components: {
         HeaderComponent,

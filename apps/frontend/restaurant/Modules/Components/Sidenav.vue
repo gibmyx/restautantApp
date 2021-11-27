@@ -3,9 +3,9 @@
         <div class="scrollbar-inner">
             <!-- Brand -->
             <div class="sidenav-header  align-items-center">
-                <a class="navbar-brand" href="javascript:void(0)">
+                <inertia-link :href="route('Welcome')" class="navbar-brand">
                     <img src="img/brand/blue.png" class="navbar-brand-img" alt="...">
-                </a>
+                </inertia-link>
             </div>
             <div class="navbar-inner">
                 <!-- Collapse -->

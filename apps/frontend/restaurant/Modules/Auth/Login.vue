@@ -27,7 +27,8 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Email" type="email" v-model="form.email">
+                                        <input class="form-control" placeholder="Email" type="email"
+                                               v-model="form.email">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -35,17 +36,21 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Password" v-model="form.password" type="password" autocomplete="current-password">
+                                        <input class="form-control" placeholder="Password" v-model="form.password"
+                                               type="password" autocomplete="current-password">
                                     </div>
                                 </div>
                                 <div class="custom-control custom-control-alternative custom-checkbox">
-                                    <input class="custom-control-input" id=" customCheckLogin" v-model="form.remember" type="checkbox">
+                                    <input class="custom-control-input" id=" customCheckLogin" v-model="form.remember"
+                                           type="checkbox">
                                     <label class="custom-control-label" for=" customCheckLogin">
                                         <span class="text-muted">Remember me</span>
                                     </label>
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary my-4" :disabled="form.processing">Sign in</button>
+                                    <button type="submit" class="btn btn-primary my-4" :disabled="form.processing">Sign
+                                        in
+                                    </button>
                                 </div>
                                 <div v-if="!!errors" class="text-center">
                                     <p v-for="error in errors" style="color: red;">{{ error }}</p>
@@ -77,6 +82,14 @@ export default defineComponent({
         errors: Object
     },
 
+    mounted() {
+
+        let body = $("body");
+
+        if (!body.hasClass("bg-default"))
+            body.addClass("bg-default");
+    },
+
     data() {
         return {
             form: this.$inertia.form({
@@ -92,12 +105,12 @@ export default defineComponent({
 
             this.form
                 .transform(data => ({
-                    ... data,
+                    ...data,
                     remember: this.form.remember ? 'on' : ''
                 }))
                 .post(this.route('login'), {
 
-                    onFailure:  (e) => {
+                    onFailure: (e) => {
                         this.$toast.success("Solicitud realizada con exito", {duration: 5000, position: "top-right"});
                     },
 
