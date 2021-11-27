@@ -9,15 +9,15 @@
     </app-layout>
 </template>
 
-<script>
 
+<script>
 import {defineComponent} from "vue";
 import AppLayout from "@/Components/AppLayout";
-import HeaderContent from "@/Modules/Dashboard/List/HeaderContent";
-import BodyContent from "@/Modules/Dashboard/List/BodyContent";
+import HeaderContent from "@/Modules/Clients/List/HeaderContent";
+import BodyContent from "@/Modules/Clients/List/BodyContent";
 
 export default defineComponent({
-    name: "Dashboard",
+    name: "List",
 
     components: {
         AppLayout,

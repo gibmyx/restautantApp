@@ -10,3 +10,7 @@ Route::post('/register', UserPostControllers::class);
 Route::get('/', function () {
     return Inertia::render('LandingPage/Welcome');
 })->name("Welcome");
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/user/profile', function () {
+    return Inertia::render('User/View/Profile');
+})->name('user.profile');

@@ -70,8 +70,8 @@
 </template>
 
 <script>
-import HeaderComponent from "@/Modules/Components/Header";
-import BodyComponent from "@/Modules/Components/Body";
+import HeaderComponent from "@/Components/Header";
+import BodyComponent from "@/Components/Body";
 
 import {defineComponent} from "vue";
 

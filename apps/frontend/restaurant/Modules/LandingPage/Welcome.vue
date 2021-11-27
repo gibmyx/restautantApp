@@ -25,8 +25,8 @@
 
 <script>
 import {defineComponent} from "vue";
-import HeaderComponent from "@/Modules/Components/Header";
-import BodyComponent from "@/Modules/Components/Body";
+import HeaderComponent from "@/Components/Header";
+import BodyComponent from "@/Components/Body";
 
 export default defineComponent({
     name: "Welcome",
