@@ -6,11 +6,10 @@
 
                 <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
                     <ol class="breadcrumb breadcrumb-links breadcrumb-dark" style="margin-bottom: 0;">
-                        <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                        <li class="breadcrumb-item"><a href="#">Dashboards</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Default</li>
+                        <li class="breadcrumb-item" v-for="value in getBreadcrumb"><inertia-link :href="route(value.link)"><i :class="value.ico"></i>{{value.name}}</inertia-link></li>
                     </ol>
                 </nav>
+
                 <!-- Navbar links -->
                 <ul class="navbar-nav align-items-center  ml-md-auto "></ul>
 
@@ -52,6 +51,46 @@
 <script>
 export default {
     name: "Topnav",
+
+    computed: {
+
+        getBreadcrumb() {
+
+            if(this.route().current('dashboard'))
+                return [
+                    {ico: 'fas fa-home', name: '', link: 'dashboard'},
+                    {ico: '', name: 'Dashboard', link: 'dashboard'}
+                ];
+            if(this.route().current('clients.list'))
+                return [
+                    {ico: 'fas fa-home', name: '', link: 'dashboard'},
+                    {ico: '', name: 'Clientes', link: 'clients.list'}
+                ];
+            if(this.route().current('tables.list'))
+                return [
+                    {ico: 'fas fa-home', name: '', link: 'dashboard'},
+                    {ico: '', name: 'Mesas', link: 'tables.list'}
+                ];
+            if(this.route().current('reservations.list'))
+                return [
+                    {ico: 'fas fa-home', name: '', link: 'dashboard'},
+                    {ico: '', name: 'Reservaciones', link: 'reservations.list'}
+                ];
+            if(this.route().current('notifications.list'))
+                return [
+                    {ico: 'fas fa-home', name: '', link: 'dashboard'},
+                    {ico: '', name: 'Notificaciones', link: 'notifications.list'}
+                ];
+            if(this.route().current('user.profile'))
+                return [
+                    {ico: 'fas fa-home', name: '', link: 'dashboard'},
+                    {ico: '', name: 'Perfil', link: 'user.profile'}
+                ];
+
+            return [];
+        },
+
+    },
 
     methods: {
         logout() {

@@ -19,31 +19,31 @@
                     <hr class="my-3">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <inertia-link :href="route('dashboard')" class="nav-link active">
-                                <i class="ni ni-tv-2 text-primary"></i>
+                            <inertia-link :href="route('dashboard')" class="nav-link" :class=" this.route().current('dashboard') ? 'active': ''">
+                                <i class="fas fa-home text-primary"></i>
                                 <span class="nav-link-text">Dashboard</span>
                             </inertia-link>
                         </li>
                         <li class="nav-item">
-                            <inertia-link :href="route('clients.list')" class="nav-link">
+                            <inertia-link :href="route('clients.list')" class="nav-link" :class=" this.route().current('clients.list') ? 'active': ''">
                                 <i class="ni ni-single-02 text-yellow"></i>
                                 <span class="nav-link-text">Clientes</span>
                             </inertia-link>
                         </li>
                         <li class="nav-item">
-                            <inertia-link :href="route('tables.list')" class="nav-link">
+                            <inertia-link :href="route('tables.list')" class="nav-link" :class=" this.route().current('tables.list') ? 'active': ''">
                                 <i class="ni ni-bullet-list-67 text-default"></i>
                                 <span class="nav-link-text">Mesas</span>
                             </inertia-link>
                         </li>
                         <li class="nav-item">
-                            <inertia-link :href="route('reservations.list')" class="nav-link">
+                            <inertia-link :href="route('reservations.list')" class="nav-link" :class=" this.route().current('reservations.list') ? 'active': ''">
                                 <i class="ni ni-key-25 text-info"></i>
                                 <span class="nav-link-text">Reservaciones</span>
                             </inertia-link>
                         </li>
                         <li class="nav-item">
-                            <inertia-link :href="route('notifications.list')" class="nav-link">
+                            <inertia-link :href="route('notifications.list')" class="nav-link" :class=" this.route().current('notifications.list') ? 'active': ''">
                                 <i class="ni ni-circle-08 text-pink"></i>
                                 <span class="nav-link-text">Notificaciones</span>
                             </inertia-link>
