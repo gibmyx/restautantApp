@@ -38,13 +38,13 @@
                         </li>
                         <li class="nav-item">
                             <inertia-link :href="route('reservations.list')" class="nav-link" :class=" this.route().current('reservations.list') ? 'active': ''">
-                                <i class="ni ni-key-25 text-info"></i>
+                                <i class="ni ni-collection text-info"></i>
                                 <span class="nav-link-text">Reservaciones</span>
                             </inertia-link>
                         </li>
                         <li class="nav-item">
                             <inertia-link :href="route('notifications.list')" class="nav-link" :class=" this.route().current('notifications.list') ? 'active': ''">
-                                <i class="ni ni-circle-08 text-pink"></i>
+                                <i class="ni ni-bell-55 text-pink"></i>
                                 <span class="nav-link-text">Notificaciones</span>
                             </inertia-link>
                         </li>
