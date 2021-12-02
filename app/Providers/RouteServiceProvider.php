@@ -17,7 +17,6 @@ class RouteServiceProvider extends ServiceProvider
         'apps/backend/restaurant/Tables/Config/routes/web.php',
         'apps/backend/restaurant/User/Config/routes/web.php',
         'apps/backend/restaurant/Dashboard/Config/routes/web.php',
-        'apps/backend/restaurant/Clients/Config/routes/web.php',
         'apps/backend/restaurant/Notifications/Config/routes/web.php',
         'routes/web.php',
     ];
@@ -26,7 +25,6 @@ class RouteServiceProvider extends ServiceProvider
         'apps/backend/restaurant/Reservations/Config/routes/api.php',
         'apps/backend/restaurant/Tables/Config/routes/api.php',
         'apps/backend/restaurant/User/Config/routes/api.php',
-        'apps/backend/restaurant/Clients/Config/routes/api.php',
         'routes/api.php',
     ];
     /**
