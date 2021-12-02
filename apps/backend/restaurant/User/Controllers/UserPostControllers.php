@@ -56,7 +56,7 @@ final class UserPostControllers extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'confirmed', 'min:6'],
             'password_confirmation' => ['required', 'min:6']
         ]);

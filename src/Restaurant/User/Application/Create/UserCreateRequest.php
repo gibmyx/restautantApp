@@ -19,7 +19,7 @@ final class UserCreateRequest
         string $email,
         string $password,
         string $passwordConfirmation,
-        ?string $origin
+        string $origin
     )
     {
         $this->name = $name;
@@ -51,7 +51,7 @@ final class UserCreateRequest
 
     public function origin(): string
     {
-        return empty($this->origin) ? 'web' : $this->origin;
+        return $this->origin;
     }
 
 }

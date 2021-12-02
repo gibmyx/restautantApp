@@ -34,10 +34,11 @@ final class UserMysqlRepository implements UserRepository
             ]);
     }
 
-    public function existsEmail(UserEmail $email): bool
+    public function existsEmail(UserEmail $email, UserOrigin $origin): bool
     {
         return DB::table(User::TABLE_NAME)
             ->where('email', $email->value())
+            ->where('origin', $origin->value())
             ->get()->count() > 0;
     }
 

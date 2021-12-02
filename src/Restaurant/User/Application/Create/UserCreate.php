@@ -29,7 +29,7 @@ final class UserCreate
 
     public function __invoke(UserCreateRequest $request)
     {
-        ($this->userEmailExists)(new UserEmail($request->email()));
+        ($this->userEmailExists)(new UserEmail($request->email()), new UserOrigin($request->origin()));
 
         $use = User::create(
             new UserName($request->name()),
