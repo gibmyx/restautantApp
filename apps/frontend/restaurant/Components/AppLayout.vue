@@ -13,7 +13,7 @@
                         <div class="col-lg-6 col-7">
                         </div>
                         <div class="col-lg-6 col-5 text-right" v-if="!route().current('dashboard') && !route().current('user.profile')">
-                            <button class="btn btn-sm btn-neutral">New</button>
+                            <button class="btn btn-sm btn-neutral" @click.prevent="create">New</button>
                             <button class="btn btn-sm btn-neutral">Filters</button>
                         </div>
                         <div class="col-lg-6 col-5 text-right" v-else>
@@ -36,13 +36,22 @@ import TopnavComponent from "@/Components/Topnav";
 import {defineComponent} from "vue";
 
 export default defineComponent({
+
     name: "AppLayout",
+
+    emits: ["create"],
 
     mounted() {
         let body = $("body");
 
         if (body.hasClass("bg-default"))
             body.removeClass("bg-default");
+    },
+
+    methods: {
+        create() {
+            this.$emit('create')
+        }
     },
 
     components: {

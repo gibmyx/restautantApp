@@ -14,3 +14,7 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/user/profile', function () {
     return Inertia::render('User/View/Profile');
 })->name('user.profile');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/clients/list', function () {
+    return Inertia::render('Clients/View/List');
+})->name('clients.list');
