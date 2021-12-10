@@ -4,7 +4,7 @@
             <header-content></header-content>
         </template>
         <template #body-content>
-            <body-content :pagination="pagination" :params="params" :rows="rows" @buscar="buscar"></body-content>
+            <body-content :pagination="pagination" :params="params" :rows="rows" @buscar="buscar" @viewDetails="viewDetails"></body-content>
         </template>
     </app-layout>
     <form-modal name="FormModal" ref="FormModal"></form-modal>
@@ -49,6 +49,9 @@ export default defineComponent({
         },
         create() {
             this.$refs.FormModal.show();
+        },
+        viewDetails(row) {
+            this.$refs.FormModal.showDetails(row);
         }
     }
 })

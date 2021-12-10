@@ -33,7 +33,7 @@
                                         Opciones <i class="fas fa-ellipsis-v"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#" @click.prevent="viewDetails(row)">Ver detalle</a>
                                     </div>
                                 </div>
                             </td>
@@ -67,18 +67,25 @@ import PaginationComponent from "@/Components/Pagination";
 export default defineComponent({
     name: "BodyContent",
 
+    emits: ["buscar", "viewDetails"],
+
     props: {
         pagination: {required: true},
         params: {required: true},
         rows: {required: true}
     },
+
     components: {
         PaginationComponent
     },
+
     methods: {
         async buscar() {
             await this.$emit('buscar')
         },
+        viewDetails(row) {
+            this.$emit('viewDetails', row)
+        }
     }
 })
 </script>

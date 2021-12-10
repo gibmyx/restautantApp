@@ -7,7 +7,7 @@
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h6 class="modal-title" id="modal-title-default">Crear mesa</h6>
+                    <h6 class="modal-title" id="modal-title-default" v-html="edithMode ? 'Editar Mesa' : 'Crear mesa'"></h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -77,12 +77,18 @@ export default defineComponent({
         return {
             formData: formData(),
             disableSave: false,
+            edithMode: false,
         }
     },
 
     methods: {
         reset() {
             this.formData = formData();
+            this.edithMode = false;
+        },
+        setForm(row) {
+            this.formData = row;
+            this.edithMode = true;
         },
         hide() {
             this.reset();
@@ -91,6 +97,12 @@ export default defineComponent({
         },
         show() {
             this.reset();
+            let modal = $('#' + this.name + 'Modal');
+            modal.modal('show');
+        },
+        showDetails(row) {
+            this.reset();
+            this.setForm(row);
             let modal = $('#' + this.name + 'Modal');
             modal.modal('show');
         },

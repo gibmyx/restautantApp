@@ -39,7 +39,7 @@ final class TablesGetController extends Controller
 
         return response()->json([
             'code' => JsonResponse::HTTP_OK,
-            'rows' => [],
+            'rows' => $response->toResponse(),
             'pagination' => $response->pagination(),
         ], JsonResponse::HTTP_OK);
     }
