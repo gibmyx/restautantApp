@@ -54,7 +54,8 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" @click.prevent="save" :disabled="disableSave">Save changes</button>
+                    <button type="button" class="btn btn-primary" @click.prevent="update" :disabled="disableSave" v-if="edithMode">Save changes</button>
+                    <button type="button" class="btn btn-primary" @click.prevent="save" :disabled="disableSave" v-else>Save changes</button>
                     <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button>
                 </div>
 
@@ -90,6 +91,7 @@ export default defineComponent({
         },
         setForm(row) {
             this.formData = row;
+            this.formData = Object.assign({}, row);
             this.edithMode = true;
         },
         reload() {
@@ -114,6 +116,18 @@ export default defineComponent({
         save() {
             this.disableSave = true;
             axios.post('/table/'+this.formData.id, this.formData).then(response => {
+                this.$toast.success("Solicitud realizada con exito", {duration: 5000, position: "top-right"});
+                this.hide();
+                this.reload();
+            }).catch(e => {
+                this.$toast.error(e, {duration: 5000, position: "top-right"});
+            }).finally(() => {
+                this.disableSave = false;
+            });
+        },
+        update() {
+            this.disableSave = true;
+            axios.put('/table', this.formData).then(response => {
                 this.$toast.success("Solicitud realizada con exito", {duration: 5000, position: "top-right"});
                 this.hide();
                 this.reload();

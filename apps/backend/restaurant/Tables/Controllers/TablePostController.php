@@ -39,8 +39,6 @@ final class TablePostController extends Controller
             return response()->json([
                 'code' => $exception->getCode(),
                 'message' => $exception->getMessage(),
-                'line' => $exception->getLine(),
-                'trace' => $exception->getTrace(),
             ],  $exception->getCode());
         }
 

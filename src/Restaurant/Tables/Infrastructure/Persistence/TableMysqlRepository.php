@@ -72,6 +72,6 @@ final class TableMysqlRepository implements TableRepository
         $query = DB::table(Table::TABLE);
         $query = (new TableMySqlFilters($query))($clause);
         $query->orderBy('created_at', 'desc');
-        return $query->paginate(10);
+        return $query->paginate(5);
     }
 }
