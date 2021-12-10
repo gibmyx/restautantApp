@@ -47,7 +47,7 @@ export default defineComponent({
             }
         },
         params: {
-            type: Array,
+            type: Object,
             required: true,
             default: []
         }

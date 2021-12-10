@@ -14,10 +14,11 @@
                         </div>
                         <div class="col-lg-6 col-5 text-right" v-if="!route().current('dashboard') && !route().current('user.profile')">
                             <button class="btn btn-sm btn-neutral" @click.prevent="create">New</button>
-                            <button class="btn btn-sm btn-neutral">Filters</button>
+                            <button class="btn btn-sm btn-neutral" @click.prevent="filters">Filters</button>
+                            <button class="btn btn-sm btn-neutral" @click.prevent="uptade">Uptade</button>
                         </div>
                         <div class="col-lg-6 col-5 text-right" v-else>
-                            <button class="btn btn-sm btn-neutral">Uptade</button>
+                            <button class="btn btn-sm btn-neutral" @click.prevent="uptade">Uptade</button>
                         </div>
                     </div>
                     <slot name="header-content"/>
@@ -39,7 +40,7 @@ export default defineComponent({
 
     name: "AppLayout",
 
-    emits: ["create"],
+    emits: ["create", "filters", "uptade"],
 
     mounted() {
         let body = $("body");
@@ -51,7 +52,13 @@ export default defineComponent({
     methods: {
         create() {
             this.$emit('create')
-        }
+        },
+        filters() {
+            this.$emit('filters')
+        },
+        uptade() {
+            this.$emit('uptade')
+        },
     },
 
     components: {

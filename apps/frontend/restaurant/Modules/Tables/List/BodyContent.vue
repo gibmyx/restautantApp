@@ -22,7 +22,7 @@
 
                         <tbody v-if="rows.length >= 1" class="list">
                         <tr v-for="row in rows">
-                            <td>Mesa numero #{{row.number}}</td>
+                            <td>MESA NUMERO #{{row.number}}</td>
                             <td>{{row.maxPeople}}</td>
                             <td>{{row.minPeople}}</td>
                             <td>{{row.description}}</td>

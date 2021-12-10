@@ -71,6 +71,8 @@ import formData from "@/Modules/Tables/Data/formData";
 export default defineComponent({
     name: "FormModal",
 
+    emits: ["reload"],
+
     props: ['name'],
 
     data() {
@@ -89,6 +91,9 @@ export default defineComponent({
         setForm(row) {
             this.formData = row;
             this.edithMode = true;
+        },
+        reload() {
+            this.$emit("reload")
         },
         hide() {
             this.reset();
@@ -111,6 +116,7 @@ export default defineComponent({
             axios.post('/table/'+this.formData.id, this.formData).then(response => {
                 this.$toast.success("Solicitud realizada con exito", {duration: 5000, position: "top-right"});
                 this.hide();
+                this.reload();
             }).catch(e => {
                 this.$toast.error(e, {duration: 5000, position: "top-right"});
             }).finally(() => {

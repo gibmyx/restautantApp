@@ -25,15 +25,15 @@
                             </inertia-link>
                         </li>
                         <li class="nav-item">
-                            <inertia-link :href="route('clients.list')" class="nav-link" :class=" this.route().current('clients.list') ? 'active': ''">
-                                <i class="ni ni-single-02 text-yellow"></i>
-                                <span class="nav-link-text">Clientes</span>
-                            </inertia-link>
-                        </li>
-                        <li class="nav-item">
                             <inertia-link :href="route('tables.list')" class="nav-link" :class=" this.route().current('tables.list') ? 'active': ''">
                                 <i class="ni ni-bullet-list-67 text-default"></i>
                                 <span class="nav-link-text">Mesas</span>
+                            </inertia-link>
+                        </li>
+                        <li class="nav-item">
+                            <inertia-link :href="route('notifications.list')" class="nav-link" :class=" this.route().current('notifications.list') ? 'active': ''">
+                                <i class="ni ni-bell-55 text-pink"></i>
+                                <span class="nav-link-text">Notificaciones</span>
                             </inertia-link>
                         </li>
                         <li class="nav-item">
@@ -43,9 +43,9 @@
                             </inertia-link>
                         </li>
                         <li class="nav-item">
-                            <inertia-link :href="route('notifications.list')" class="nav-link" :class=" this.route().current('notifications.list') ? 'active': ''">
-                                <i class="ni ni-bell-55 text-pink"></i>
-                                <span class="nav-link-text">Notificaciones</span>
+                            <inertia-link :href="route('clients.list')" class="nav-link" :class=" this.route().current('clients.list') ? 'active': ''">
+                                <i class="ni ni-single-02 text-yellow"></i>
+                                <span class="nav-link-text">Clientes</span>
                             </inertia-link>
                         </li>
                     </ul>
