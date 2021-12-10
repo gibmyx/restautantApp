@@ -9,10 +9,23 @@ use function Lambdish\Phunctional\map;
 final class TablesResponse
 {
     private $table;
+    private $pagination;
 
-    public function __construct(TableResponse ...$table)
+    public function __construct(
+        TableResponse ...$table
+    )
     {
         $this->table = $table;
+    }
+
+    public function setPagination(array $pagination)
+    {
+        $this->pagination = $pagination;
+    }
+
+    public function pagination()
+    {
+        return $this->pagination;
     }
 
     public function toResponse(): array

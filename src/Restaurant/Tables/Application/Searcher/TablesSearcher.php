@@ -22,10 +22,23 @@ final class TablesSearcher
 
     public function __invoke(TablesSearcherRequest $request)
     {
-        return new TablesResponse(...map(
+        $result = $this->repository->searcherList($request->filters());
+
+        $tablesResponse = new TablesResponse(...map(
             $this->toResponse(),
-            $this->repository->searcherList($request->filters())
+            $result->items()
         ));
+
+        $tablesResponse->setPagination([
+            'total' => $result->total(),
+            'current_page' => $result->currentPage(),
+            'last_page' => $result->lastPage(),
+            'per_page' => $result->perPage(),
+            'from' => $result->currentPage(),
+            'to' => $result->lastPage(),
+        ]);
+
+        return $tablesResponse;
     }
 
 

@@ -15,15 +15,17 @@
                             <th scope="col" class="sort" data-sort="name">Numero de mesa</th>
                             <th scope="col" class="sort" data-sort="budget">Maximo de personas</th>
                             <th scope="col" class="sort" data-sort="status">Minimo de personas</th>
+                            <th scope="col" class="sort" data-sort="status">Descripción</th>
                             <th scope="col" width="1%"></th>
                         </tr>
                         </thead>
-                        <tbody class="list">
 
-                        <tr>
-                            <th></th>
-                            <td></td>
-                            <td></td>
+                        <tbody v-if="rows.length >= 1" class="list">
+                        <tr v-for="row in rows">
+                            <td>Mesa numero #{{row.number}}</td>
+                            <td>{{row.maxPeople}}</td>
+                            <td>{{row.minPeople}}</td>
+                            <td>{{row.description}}</td>
                             <td>
                                 <div class="dropdown">
                                     <a class="btn" href="#"
@@ -32,19 +34,25 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                         <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
                                     </div>
                                 </div>
                             </td>
                         </tr>
-
+                        </tbody>
+                        <tbody v-else>
+                        <tr>
+                            <td colspan="8">
+                                <div class="alert alert-secondary text-center" role="alert">
+                                    No se encontraron resultados
+                                </div>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
                 <!-- Card footer -->
                 <div class="card-footer py-4">
-                    <pagination-component></pagination-component>
+                    <pagination-component :pagination="pagination" :params="params"  @buscar="buscar"></pagination-component>
                 </div>
             </div>
         </div>
@@ -59,9 +67,19 @@ import PaginationComponent from "@/Components/Pagination";
 export default defineComponent({
     name: "BodyContent",
 
+    props: {
+        pagination: {required: true},
+        params: {required: true},
+        rows: {required: true}
+    },
     components: {
         PaginationComponent
     },
+    methods: {
+        async buscar() {
+            await this.$emit('buscar')
+        },
+    }
 })
 </script>
 

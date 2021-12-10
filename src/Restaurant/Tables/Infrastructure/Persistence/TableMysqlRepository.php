@@ -67,10 +67,10 @@ final class TableMysqlRepository implements TableRepository
             ]);
     }
 
-    public function searcherList(array $clause): array
+    public function searcherList(array $clause)
     {
         $query = DB::table(Table::TABLE);
         $query = (new TableMySqlFilters($query))($clause);
-        return $query->get()->toArray();
+        return $query->paginate(10);
     }
 }

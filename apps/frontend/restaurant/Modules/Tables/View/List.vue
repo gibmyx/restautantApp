@@ -4,7 +4,7 @@
             <header-content></header-content>
         </template>
         <template #body-content>
-            <body-content></body-content>
+            <body-content :pagination="pagination" :params="params" :rows="rows" @buscar="buscar"></body-content>
         </template>
     </app-layout>
     <form-modal name="FormModal" ref="FormModal"></form-modal>
@@ -28,6 +28,14 @@ export default defineComponent({
         BodyContent,
     },
 
+    data() {
+        return {
+            params: [],
+            pagination: [],
+            rows: [],
+        }
+    },
+
     mounted() {
         this.buscar()
     },
@@ -35,13 +43,11 @@ export default defineComponent({
     methods: {
         buscar() {
             axios.get('/tables').then(response => {
-                console.log(response)
-            }).catch(e => {
-
+                this.rows = response.data.rows;
+                this.pagination = response.data.pagination;
             });
         },
         create() {
-            console.log('there hi');
             this.$refs.FormModal.show();
         }
     }
