@@ -24,10 +24,23 @@ final class ReservationSearcher
 
     public function __invoke(ReservationSearcherRequest $request): ReservationsResponse
     {
-        return new ReservationsResponse(...map(
+        $result = $this->repository->searcherList($request->filters());
+
+        $response = new ReservationsResponse(...map(
             $this->toResponse(),
-            $this->repository->searcherList($request->filters())
+            $result->items()
         ));
+
+        $response->setPagination([
+            'total' => $result->total(),
+            'current_page' => $result->currentPage(),
+            'last_page' => $result->lastPage(),
+            'per_page' => $result->perPage(),
+            'from' => $result->currentPage(),
+            'to' => $result->lastPage(),
+        ]);
+
+        return $response;
     }
 
     private function toResponse(): callable
@@ -38,6 +51,7 @@ final class ReservationSearcher
                 (string)$row->table_id,
                 (int)$row->user_id,
                 (int)$row->peoples,
+                (string)$row->date,
                 (string)$row->date,
                 (string)$row->created_at,
                 (string)$row->updated_at

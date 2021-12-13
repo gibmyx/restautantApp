@@ -24,12 +24,12 @@ final class TablesSearcher
     {
         $result = $this->repository->searcherList($request->filters());
 
-        $tablesResponse = new TablesResponse(...map(
+        $response = new TablesResponse(...map(
             $this->toResponse(),
             $result->items()
         ));
 
-        $tablesResponse->setPagination([
+        $response->setPagination([
             'total' => $result->total(),
             'current_page' => $result->currentPage(),
             'last_page' => $result->lastPage(),
@@ -38,7 +38,7 @@ final class TablesSearcher
             'to' => $result->lastPage(),
         ]);
 
-        return $tablesResponse;
+        return $response;
     }
 
 

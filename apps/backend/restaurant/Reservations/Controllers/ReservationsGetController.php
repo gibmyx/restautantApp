@@ -40,6 +40,7 @@ final class ReservationsGetController extends Controller
         return response()->json([
             'code' => JsonResponse::HTTP_OK,
             'rows' => $response->toResponse(),
+            'pagination' => $response->pagination(),
         ], JsonResponse::HTTP_OK);
     }
 }

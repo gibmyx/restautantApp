@@ -11,12 +11,23 @@ use function Lambdish\Phunctional\map;
 final class ReservationsResponse
 {
     private $response;
+    private $pagination;
 
     public function __construct(
         ReservationResponse ...$response
     )
     {
         $this->response = $response;
+    }
+
+    public function setPagination(array $pagination)
+    {
+        $this->pagination = $pagination;
+    }
+
+    public function pagination()
+    {
+        return $this->pagination;
     }
 
     public function toResponse(): array

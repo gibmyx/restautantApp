@@ -8,31 +8,17 @@ namespace AppRestaurant\Restaurant\Reservations\Application\Response;
 
 final class ReservationResponse
 {
-    private $id;
-    private $tableId;
-    private $userId;
-    private $peoples;
-    private $date;
-    private $createdAt;
-    private $updatedAt;
-
     public function __construct(
-        string $id,
-        string $tableId,
-        int    $userId,
-        int    $peoples,
-        string $date,
-        string $createdAt,
-        string $updatedAt
+        private string $id,
+        private string $tableId,
+        private int    $userId,
+        private int    $peoples,
+        private string $date,
+        private string $state,
+        private string $createdAt,
+        private string $updatedAt
     )
     {
-        $this->id = $id;
-        $this->tableId = $tableId;
-        $this->userId = $userId;
-        $this->peoples = $peoples;
-        $this->date = $date;
-        $this->createdAt = $createdAt;
-        $this->updatedAt = $updatedAt;
     }
 
     public function id(): string

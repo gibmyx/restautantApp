@@ -42,25 +42,6 @@ final class ReservationsGetControllerTest extends TestCase
     /**
      * @test
      */
-    public function this_should_get_the_reservation_for_user_exists()
-    {
-        $user = User::factory()->create();
-        $this->authUser($user);
-
-
-        $uuid = Uuid::random()->value();
-        $uuidTable = Uuid::random()->value();
-        $this->create_table($uuidTable);
-        $this->create_reservation($uuid, $uuidTable, $user);
-
-        $response = $this->getJson('/api/reservations');
-
-        $response->assertStatus(JsonResponse::HTTP_OK);
-    }
-
-    /**
-     * @test
-     */
     public function this_should_get_the_reservation_exists()
     {
         $user = User::factory()->create();
@@ -72,7 +53,7 @@ final class ReservationsGetControllerTest extends TestCase
         $this->create_table($uuidTable);
         $this->create_reservation($uuid, $uuidTable, $user);
 
-        $response = $this->getJson('/api/reservations');
+        $response = $this->getJson('/reservations');
 
         $response->assertStatus(JsonResponse::HTTP_OK);
     }
