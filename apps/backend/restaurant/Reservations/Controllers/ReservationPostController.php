@@ -32,6 +32,7 @@ final class ReservationPostController extends Controller
                 (int)$request->userId,
                 (int)$request->people,
                 (string)$request->date,
+                (string)$request->state,
             ));
         } catch (\Exception $exception) {
             return response()->json([

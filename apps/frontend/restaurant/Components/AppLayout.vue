@@ -12,14 +12,7 @@
                     <div class="row align-items-center py-4">
                         <div class="col-lg-6 col-7">
                         </div>
-                        <div class="col-lg-6 col-5 text-right" v-if="!route().current('dashboard') && !route().current('user.profile')">
-                            <button class="btn btn-sm btn-neutral" @click.prevent="create">New</button>
-                            <button class="btn btn-sm btn-neutral" @click.prevent="filters">Filters</button>
-                            <button class="btn btn-sm btn-neutral" @click.prevent="uptade">Uptade</button>
-                        </div>
-                        <div class="col-lg-6 col-5 text-right" v-else>
-                            <button class="btn btn-sm btn-neutral" @click.prevent="uptade">Uptade</button>
-                        </div>
+                        <div class="col-lg-6 col-5 text-right" v-html="getOpctions"></div>
                     </div>
                     <slot name="header-content"/>
                 </div>
@@ -31,7 +24,17 @@
     </div>
 </template>
 
+
 <script>
+const optionOne =  `<button class="btn btn-sm btn-neutral uptade">Uptade</button>`;
+
+const optionTwo =  `<button class="btn btn-sm btn-neutral filters">Filters</button>
+                    <button class="btn btn-sm btn-neutral uptade">Uptade</button>`;
+
+const optionThree =  `<button class="btn btn-sm btn-neutral create">New</button>
+                    <button class="btn btn-sm btn-neutral filters">Filters</button>
+                    <button class="btn btn-sm btn-neutral uptade">Uptade</button>`;
+
 import SidenavComponent from "@/Components/Sidenav";
 import TopnavComponent from "@/Components/Topnav";
 import {defineComponent} from "vue";
@@ -40,8 +43,6 @@ export default defineComponent({
 
     name: "AppLayout",
 
-    emits: ["create", "filters", "uptade"],
-
     mounted() {
         let body = $("body");
 
@@ -49,16 +50,14 @@ export default defineComponent({
             body.removeClass("bg-default");
     },
 
-    methods: {
-        create() {
-            this.$emit('create')
-        },
-        filters() {
-            this.$emit('filters')
-        },
-        uptade() {
-            this.$emit('uptade')
-        },
+    computed: {
+        getOpctions() {
+            if(route().current('dashboard') || route().current('user.profile')) return optionOne;
+
+            if(route().current('clients.list') || route().current('reservations.list')) return optionTwo;
+
+            if(route().current('tables.list') || route().current('notifications.list')) return optionThree;
+        }
     },
 
     components: {

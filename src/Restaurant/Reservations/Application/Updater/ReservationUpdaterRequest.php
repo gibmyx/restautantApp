@@ -8,25 +8,15 @@ namespace AppRestaurant\Restaurant\Reservations\Application\Updater;
 
 final class ReservationUpdaterRequest
 {
-    private $id;
-    private $tableId;
-    private $userId;
-    private $people;
-    private $date;
-
     public function __construct(
-        string $id,
-        string $tableId,
-        int    $userId,
-        int    $people,
-        string $date
+        private string $id,
+        private string $tableId,
+        private int    $userId,
+        private int    $people,
+        private string $date,
+        private string $state
     )
     {
-        $this->id = $id;
-        $this->tableId = $tableId;
-        $this->userId = $userId;
-        $this->people = $people;
-        $this->date = $date;
     }
 
     public function id(): string
@@ -52,6 +42,11 @@ final class ReservationUpdaterRequest
     public function date(): string
     {
         return $this->date;
+    }
+
+    public function state(): string
+    {
+        return $this->state;
     }
 
 

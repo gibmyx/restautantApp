@@ -7,6 +7,7 @@ namespace AppRestaurant\Restaurant\Reservations\Domain\Entity;
 use AppRestaurant\Restaurant\Reservations\Domain\Event\ReservationCreated;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationId;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationDate;
+use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationState;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationUserId;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationTableId;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationPeoples;
@@ -19,31 +20,21 @@ final class Reservation
 {
     const TABLE = "reservation";
 
-    private $id;
-    private $tableId;
-    private $userId;
-    private $peoples;
-    private $date;
-    private $createdAt;
-    private $updatedAt;
+    const STATE_PENDING = "pending";
+    const STATE_APPROVED = "approved";
+    const STATE_CANCELED = "canceled";
 
     private function __construct(
-        ReservationId        $id,
-        ReservationTableId   $tableId,
-        ReservationUserId   $userId,
-        ReservationPeoples   $peoples,
-        ReservationDate      $date,
-        ReservationCreatedAt $createdAt,
-        ReservationUpdatedAt $updatedAt
+        private ReservationId        $id,
+        private ReservationTableId   $tableId,
+        private ReservationUserId   $userId,
+        private ReservationPeoples   $peoples,
+        private ReservationDate      $date,
+        private ReservationState      $state,
+        private ReservationCreatedAt $createdAt,
+        private ReservationUpdatedAt $updatedAt
     )
     {
-        $this->id = $id;
-        $this->tableId = $tableId;
-        $this->userId = $userId;
-        $this->peoples = $peoples;
-        $this->date = $date;
-        $this->createdAt = $createdAt;
-        $this->updatedAt = $updatedAt;
     }
 
     public static function create(
@@ -51,7 +42,8 @@ final class Reservation
         ReservationTableId $tableId,
         ReservationUserId  $userId,
         ReservationPeoples $peoples,
-        ReservationDate    $date
+        ReservationDate    $date,
+        ReservationState    $state
     ): self
     {
         return new self(
@@ -60,6 +52,7 @@ final class Reservation
             $userId,
             $peoples,
             $date,
+            $state,
             new ReservationCreatedAt(),
             new ReservationUpdatedAt()
         );
@@ -71,6 +64,7 @@ final class Reservation
         ReservationUserId   $userId,
         ReservationPeoples   $peoples,
         ReservationDate      $date,
+        ReservationState    $state,
         ReservationCreatedAt $createdAt,
         ReservationUpdatedAt $updatedAt
     ): self
@@ -81,6 +75,7 @@ final class Reservation
             $userId,
             $peoples,
             $date,
+            $state,
             $createdAt,
             $updatedAt,
         );
@@ -109,6 +104,11 @@ final class Reservation
     public function date(): ReservationDate
     {
         return $this->date;
+    }
+
+    public function state(): ReservationState
+    {
+        return $this->state;
     }
 
     public function createdAt(): ReservationCreatedAt
@@ -143,5 +143,13 @@ final class Reservation
             $this->updatedAt = new ReservationUpdatedAt();
 
         $this->date = $newDate;
+    }
+
+    public function changeState(ReservationState $newState): void
+    {
+        if (! $this->state->equals($newState))
+            $this->updatedAt = new ReservationUpdatedAt();
+
+        $this->state = $newState;
     }
 }

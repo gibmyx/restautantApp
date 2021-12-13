@@ -1,5 +1,5 @@
 <template>
-    <app-layout @create="create" @filters="filters" @uptade="buscar">
+    <app-layout>
         <template #header-content>
             <header-content v-show="filtersActive" :params="params" :buscar="buscar"></header-content>
         </template>
@@ -40,21 +40,30 @@ export default defineComponent({
     },
 
     mounted() {
+        this.init()
         this.buscar()
     },
 
     methods: {
+        init() {
+            let context = this;
+            let body = $('body');
+
+            body.off('click', '.uptade').on('click', '.uptade', function () {
+                context.buscar();
+            });
+            body.off('click', '.filters').on('click', '.filters', function () {
+                context.filtersActive = !context.filtersActive;
+            });
+            body.off('click', '.create').on('click', '.create', function () {
+                context.$refs.FormModal.show();
+            });
+        },
         buscar() {
             axios.get('/tables?'+qs.stringify(this.params)).then(response => {
                 this.rows = response.data.rows;
                 this.pagination = response.data.pagination;
             });
-        },
-        create() {
-            this.$refs.FormModal.show();
-        },
-        filters() {
-            this.filtersActive = !this.filtersActive;
         },
         viewDetails(row) {
             this.$refs.FormModal.showDetails(row);

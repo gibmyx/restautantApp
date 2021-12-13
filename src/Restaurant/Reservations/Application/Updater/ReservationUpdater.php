@@ -11,6 +11,7 @@ use AppRestaurant\Restaurant\Reservations\Domain\Service\ReservationFinder;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationDate;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationId;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationPeoples;
+use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationState;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationTableId;
 
 final class ReservationUpdater
@@ -33,6 +34,7 @@ final class ReservationUpdater
         $reservation->changeTable(new ReservationTableId($request->tableId()));
         $reservation->changePeoples(new ReservationPeoples($request->people()));
         $reservation->changeDate(new ReservationDate($request->date()));
+        $reservation->changeState(new ReservationState($request->state()));
         $this->repository->update($reservation);
     }
 

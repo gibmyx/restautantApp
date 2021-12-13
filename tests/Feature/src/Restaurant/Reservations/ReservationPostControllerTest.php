@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\src\Restaurant\Reservations;
 
 use App\Models\User;
+use AppRestaurant\Restaurant\Reservations\Domain\Entity\Reservation;
 use AppRestaurant\Restaurant\Shared\Domain\ValueObject\Uuid;
 use Faker\Factory;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -44,6 +45,7 @@ final class ReservationPostControllerTest extends TestCase
             'tableId' => $uuidTable,
             'userId' => $user->id,
             'people' => 6,
+            'state' => Reservation::STATE_PENDING,
             'date' => '2021-8-9 16:30:00',
         ];
         $response = $this->postJson("/api/reservation/{$uuid}", $reservation);

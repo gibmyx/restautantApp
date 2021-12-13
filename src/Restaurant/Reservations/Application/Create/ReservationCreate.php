@@ -10,6 +10,7 @@ use AppRestaurant\Restaurant\Reservations\Domain\Entity\Reservation;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationDate;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationId;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationPeoples;
+use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationState;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationTableId;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationUserId;
 
@@ -31,7 +32,8 @@ final class ReservationCreate
             new ReservationTableId($request->tableId()),
             new ReservationUserId($request->userId()),
             new ReservationPeoples($request->people()),
-            new ReservationDate($request->date())
+            new ReservationDate($request->date()),
+            new ReservationState($request->state())
         );
 
         $this->repository->create($reservation);

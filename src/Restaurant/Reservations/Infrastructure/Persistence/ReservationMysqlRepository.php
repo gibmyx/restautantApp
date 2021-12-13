@@ -10,6 +10,7 @@ use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationCreatedA
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationDate;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationId;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationPeoples;
+use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationState;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationTableId;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationUpdatedAt;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationUserId;
@@ -24,9 +25,10 @@ final class ReservationMysqlRepository implements ReservationRepository
             ->insert([
                 'id'            => $reservation->id()->value(),
                 'table_id'      => $reservation->tableId()->value(),
-                'user_id'      => $reservation->userId()->value(),
+                'user_id'       => $reservation->userId()->value(),
                 'peoples'       => $reservation->peoples()->value(),
                 'date'          => $reservation->date()->value(),
+                'state'         => $reservation->state()->value(),
                 'created_at'    => $reservation->createdAt()->value(),
                 'updated_at'    => $reservation->updatedAt()->value()
             ]);
@@ -53,6 +55,7 @@ final class ReservationMysqlRepository implements ReservationRepository
                 new ReservationUserId($object->user_id),
                 new ReservationPeoples($object->peoples),
                 new ReservationDate($object->date),
+                new ReservationState($object->state),
                 new ReservationCreatedAt($object->created_at),
                 new ReservationUpdatedAt($object->updated_at),
             );
@@ -66,9 +69,10 @@ final class ReservationMysqlRepository implements ReservationRepository
             ->update([
                 'id'            => $reservation->id()->value(),
                 'table_id'      => $reservation->tableId()->value(),
-                'user_id'      => $reservation->userId()->value(),
+                'user_id'       => $reservation->userId()->value(),
                 'peoples'       => $reservation->peoples()->value(),
                 'date'          => $reservation->date()->value(),
+                'state'         => $reservation->state()->value(),
                 'created_at'    => $reservation->createdAt()->value(),
                 'updated_at'    => $reservation->updatedAt()->value()
             ]);
