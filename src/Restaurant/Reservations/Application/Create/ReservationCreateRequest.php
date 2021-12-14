@@ -14,7 +14,9 @@ final class ReservationCreateRequest
         private int    $userId,
         private int    $people,
         private string $date,
-        private string $state
+        private string $state,
+        private int    $numberTable,
+        private string $userName
     )
     {
     }
@@ -47,6 +49,16 @@ final class ReservationCreateRequest
     public function state(): string
     {
         return $this->state;
+    }
+
+    public function numberTable(): int
+    {
+        return $this->numberTable;
+    }
+
+    public function userName(): string
+    {
+        return $this->userName;
     }
 
 }

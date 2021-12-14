@@ -47,6 +47,8 @@ final class ReservationPostControllerTest extends TestCase
             'people' => 6,
             'state' => Reservation::STATE_PENDING,
             'date' => '2021-8-9 16:30:00',
+            'numberTable' => 1,
+            'userName' => $user->name,
         ];
         $response = $this->postJson("/api/reservation/{$uuid}", $reservation);
 

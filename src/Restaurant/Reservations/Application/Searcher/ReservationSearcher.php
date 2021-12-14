@@ -52,7 +52,9 @@ final class ReservationSearcher
                 (int)$row->user_id,
                 (int)$row->peoples,
                 (string)$row->date,
-                (string)$row->date,
+                (string)$row->state,
+                (int)$row->number_table,
+                (string)$row->user_name,
                 (string)$row->created_at,
                 (string)$row->updated_at
             );

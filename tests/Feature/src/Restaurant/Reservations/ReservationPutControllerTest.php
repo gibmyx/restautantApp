@@ -99,6 +99,8 @@ final class ReservationPutControllerTest extends TestCase
             'people' => 6,
             'date' => '2021-8-9 16:30:00',
             'state' => Reservation::STATE_PENDING,
+            'numberTable' => 1,
+            'userName' => $user->name,
         ];
 
         $this->postJson("/api/reservation/{$uuid}", $reserva);

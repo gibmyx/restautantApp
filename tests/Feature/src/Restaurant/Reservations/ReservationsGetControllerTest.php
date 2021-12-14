@@ -66,6 +66,8 @@ final class ReservationsGetControllerTest extends TestCase
             'userId' => $user->id,
             'people' => 6,
             'date' => '2021-8-9 16:30:00',
+            'numberTable' => 1,
+            'userName' => $user->name,
         ]);
     }
 

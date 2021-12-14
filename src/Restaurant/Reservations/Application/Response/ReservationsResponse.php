@@ -32,13 +32,16 @@ final class ReservationsResponse
 
     public function toResponse(): array
     {
-        return map(function(ReservationResponse $table) {
+        return map(function (ReservationResponse $reservationResponse) {
             return [
-                'id' => $table->id(),
-                'tableId' => $table->tableId(),
-                'userId' => $table->userId(),
-                'peoples' => $table->peoples(),
-                'date' => $table->date(),
+                'id' => $reservationResponse->id(),
+                'tableId' => $reservationResponse->tableId(),
+                'userId' => $reservationResponse->userId(),
+                'peoples' => $reservationResponse->peoples(),
+                'date' => $reservationResponse->date(),
+                'state' => $reservationResponse->state(),
+                'numberTable' => $reservationResponse->numberTable(),
+                'userName' => $reservationResponse->userName(),
             ];
         }, $this->response);
     }

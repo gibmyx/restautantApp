@@ -13,14 +13,17 @@ class CreateTables extends Migration
      */
     public function up()
     {
+        if (Schema::hasTable("tables")) return;
+
         Schema::create('tables', function (Blueprint $table) {
             $table->uuid('id');
             $table->integer('number');
             $table->integer('max_people');
             $table->integer('min_people');
             $table->string('description');
-            $table->primary('id');
             $table->timestamps();
+
+            $table->primary("id");
         });
     }
 

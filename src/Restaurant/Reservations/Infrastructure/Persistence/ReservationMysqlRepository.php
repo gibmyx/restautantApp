@@ -9,11 +9,13 @@ use AppRestaurant\Restaurant\Reservations\Domain\Entity\Reservation;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationCreatedAt;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationDate;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationId;
+use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationNumberTable;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationPeoples;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationState;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationTableId;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationUpdatedAt;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationUserId;
+use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationUserName;
 use Illuminate\Support\Facades\DB;
 
 final class ReservationMysqlRepository implements ReservationRepository
@@ -29,6 +31,8 @@ final class ReservationMysqlRepository implements ReservationRepository
                 'peoples'       => $reservation->peoples()->value(),
                 'date'          => $reservation->date()->value(),
                 'state'         => $reservation->state()->value(),
+                'number_table'  => $reservation->numberTable()->value(),
+                'user_name'     => $reservation->userName()->value(),
                 'created_at'    => $reservation->createdAt()->value(),
                 'updated_at'    => $reservation->updatedAt()->value()
             ]);
@@ -39,7 +43,8 @@ final class ReservationMysqlRepository implements ReservationRepository
         $query = DB::table(Reservation::TABLE);
         $query = (new ReservationMySqlFilters($query))($clause);
         $query->orderBy('created_at', 'desc');
-        return $query->paginate(5);    }
+        return $query->paginate(5);
+    }
 
     public function find(ReservationId $id): ?Reservation
     {
@@ -56,6 +61,8 @@ final class ReservationMysqlRepository implements ReservationRepository
                 new ReservationPeoples($object->peoples),
                 new ReservationDate($object->date),
                 new ReservationState($object->state),
+                new ReservationNumberTable((int) $object->number_table),
+                new ReservationUserName($object->user_name),
                 new ReservationCreatedAt($object->created_at),
                 new ReservationUpdatedAt($object->updated_at),
             );
@@ -73,6 +80,8 @@ final class ReservationMysqlRepository implements ReservationRepository
                 'peoples'       => $reservation->peoples()->value(),
                 'date'          => $reservation->date()->value(),
                 'state'         => $reservation->state()->value(),
+                'number_table'  => $reservation->numberTable()->value(),
+                'user_name'     => $reservation->userName()->value(),
                 'created_at'    => $reservation->createdAt()->value(),
                 'updated_at'    => $reservation->updatedAt()->value()
             ]);

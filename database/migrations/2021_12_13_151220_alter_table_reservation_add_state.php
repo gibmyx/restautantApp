@@ -16,7 +16,13 @@ class AlterTableReservationAddState extends Migration
         Schema::table('reservation', function (Blueprint $table) {
 
             if (! Schema::hasColumn("reservation", "state"))
-                $table->text('state')->after('date');
+                $table->string('state', 255)->after('date');
+
+            if (! Schema::hasColumn("reservation", "number_table"))
+                $table->string('number_table', 255)->after('state');
+
+            if (! Schema::hasColumn("reservation", "user_name"))
+                $table->string('user_name', 255)->after('number_table');
 
         });
     }
@@ -33,6 +39,12 @@ class AlterTableReservationAddState extends Migration
 
             if (Schema::hasColumn("reservation", "state"))
                 $table->dropColumn('state');
+
+            if (Schema::hasColumn("reservation", "number_table"))
+                $table->dropColumn('number_table');
+
+            if (Schema::hasColumn("reservation", "user_name"))
+                $table->dropColumn('user_name');
 
         });
     }

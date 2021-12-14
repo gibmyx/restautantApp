@@ -4,7 +4,7 @@
             <header-content></header-content>
         </template>
         <template #body-content>
-            <body-content></body-content>
+            <body-content :pagination="pagination" :params="params" :rows="rows" @buscar="buscar" ></body-content>
         </template>
     </app-layout>
 </template>
@@ -16,6 +16,7 @@ import AppLayout from "@/Components/AppLayout";
 import HeaderContent from "@/Modules/Reservations/List/HeaderContent";
 import BodyContent from "@/Modules/Reservations/List/BodyContent";
 import params from "@/Modules/Reservations/Data/params";
+import qs from "qs"
 
 export default defineComponent({
     name: "List",

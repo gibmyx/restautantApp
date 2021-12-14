@@ -13,6 +13,8 @@ class CreateReservation extends Migration
      */
     public function up()
     {
+        if (Schema::hasTable("reservation")) return;
+
         Schema::create('reservation', function (Blueprint $table) {
             $table->uuid('id');
             $table->uuid('table_id');
@@ -20,6 +22,8 @@ class CreateReservation extends Migration
             $table->integer('peoples');
             $table->dateTime('date');
             $table->timestamps();
+
+            $table->primary("id");
         });
     }
 
