@@ -20,18 +20,20 @@
         </div>
 
         <!-- Page content -->
-        <div class="container-fluid mt--6"><slot name="body-content"/></div>
+        <div class="container-fluid mt--6">
+            <slot name="body-content"/>
+        </div>
     </div>
 </template>
 
 
 <script>
-const optionOne =  `<button class="btn btn-sm btn-neutral uptade">Uptade</button>`;
+const optionOne = `<button class="btn btn-sm btn-neutral uptade">Uptade</button>`;
 
-const optionTwo =  `<button class="btn btn-sm btn-neutral filters">Filters</button>
+const optionTwo = `<button class="btn btn-sm btn-neutral filters">Filters</button>
                     <button class="btn btn-sm btn-neutral uptade">Uptade</button>`;
 
-const optionThree =  `<button class="btn btn-sm btn-neutral create">New</button>
+const optionThree = `<button class="btn btn-sm btn-neutral create">New</button>
                     <button class="btn btn-sm btn-neutral filters">Filters</button>
                     <button class="btn btn-sm btn-neutral uptade">Uptade</button>`;
 
@@ -52,11 +54,11 @@ export default defineComponent({
 
     computed: {
         getOpctions() {
-            if(route().current('dashboard') || route().current('user.profile')) return optionOne;
+            if (route().current('dashboard') || route().current('user.profile')) return optionOne;
 
-            if(route().current('clients.list') || route().current('reservations.list')) return optionTwo;
+            if (route().current('clients.list') || route().current('reservations.list')) return optionTwo;
 
-            if(route().current('tables.list') || route().current('notifications.list')) return optionThree;
+            if (route().current('tables.list') || route().current('notifications.list')) return optionThree;
         }
     },
 
@@ -67,6 +69,13 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
 
+<style>
+
+.select2-container .select2-selection--single,
+.select2-container--default.select2-container--focus .select2-selection--multiple,
+.select2-container--default .select2-selection--multiple,
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    padding: 0px !important;
+}
 </style>

@@ -30,6 +30,8 @@
         "vue-loader": "^16.1.2"
     },
     "dependencies": {
-        "@meforma/vue-toaster": "^1.2.2"
+        "@meforma/vue-toaster": "^1.2.2",
+        "vue3-select2-component": "^0.1.7",
+        "moment": "^2.29.1"
     }
 }

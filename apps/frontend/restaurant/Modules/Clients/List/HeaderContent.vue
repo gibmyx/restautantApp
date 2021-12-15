@@ -6,9 +6,10 @@
                 <!-- Card body -->
                 <div class="card-body">
                     <div class="form-group">
-                        <label class="form-control-label" for="input-min-people">Numero de mesa</label>
-                        <input type="number" min="1" pattern="^[0-9]+" id="input-min-people" v-model="params.number"
-                               class="form-control form-control-sm">
+                        <label class="form-control-label">Numero de mesa</label>
+
+                        <select2 name="state" :options="options">
+                        </select2>
                     </div>
                 </div>
             </div>
@@ -31,6 +32,12 @@ export default defineComponent({
             default: []
         }
     },
+
+    data() {
+        return {
+            options: [{id: 1, text: '1'}],
+        }
+    }
 })
 </script>
 
