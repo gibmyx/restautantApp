@@ -72,7 +72,8 @@
                 </div>
                 <!-- Card footer -->
                 <div class="card-footer py-4">
-                    <pagination-component></pagination-component>
+                    <pagination-component :pagination="pagination" :params="params"
+                                          @buscar="buscar"></pagination-component>
                 </div>
             </div>
         </div>
@@ -87,9 +88,23 @@ import {defineComponent} from "vue";
 export default defineComponent({
     name: "BodyContent",
 
+    emits: ["buscar"],
+
+    props: {
+        pagination: {required: true},
+        params: {required: true},
+        rows: {required: true}
+    },
+
     components: {
         PaginationComponent
     },
+
+    methods: {
+        async buscar() {
+            await this.$emit('buscar')
+        },
+    }
 
 })
 
