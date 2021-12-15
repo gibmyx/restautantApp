@@ -13,6 +13,13 @@ final class ReservationsResponse
     private $response;
     private $pagination;
 
+    private $stateClass = [
+        "pending" => "bg-warning",
+        "approved" => "bg-info",
+        "completed" => "bg-success",
+        "canceled" => "bg-danger",
+    ];
+
     public function __construct(
         ReservationResponse ...$response
     )
@@ -42,6 +49,7 @@ final class ReservationsResponse
                 'state' => $reservationResponse->state(),
                 'numberTable' => $reservationResponse->numberTable(),
                 'userName' => $reservationResponse->userName(),
+                'stateClass' => key_exists($reservationResponse->state(), $this->stateClass) ? $this->stateClass[$reservationResponse->state()] : '',
             ];
         }, $this->response);
     }

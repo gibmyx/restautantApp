@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="{{asset('css/nucleo/css/nucleo.css')}}">
         <link rel="stylesheet" href="{{asset('css/@fortawesome/fontawesome-free/css/all.min.css')}}">
         <link rel="stylesheet" href="{{asset('css/argon.css')}}">
+        <link rel="stylesheet" href="{{asset('css/animate.min.css')}}">
 
         <!-- Scripts -->
         @routes

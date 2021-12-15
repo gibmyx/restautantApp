@@ -23,11 +23,16 @@
 
                         <tbody v-if="rows.length >= 1" class="list">
                         <tr v-for="row in rows">
-                            <td>MESA NUMERO # {{row.numberTable}}</td>
-                            <td>{{row.userName}}</td>
-                            <td># {{row.peoples}}</td>
-                            <td>{{row.date}}</td>
-                            <td>{{row.state}}</td>
+                            <td>MESA NUMERO # {{ row.numberTable }}</td>
+                            <td>{{ row.userName }}</td>
+                            <td># {{ row.peoples }}</td>
+                            <td>{{ row.date }}</td>
+                            <td>
+                              <span class="badge badge-dot mr-4">
+                                  <i :class="row.stateClass"></i>
+                                  <span class="status">{{ row.state }}</span>
+                              </span>
+                            </td>
                         </tr>
                         </tbody>
 

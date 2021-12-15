@@ -1,7 +1,7 @@
 <template>
     <app-layout>
         <template #header-content>
-            <header-content></header-content>
+            <header-content v-show="filtersActive" :params="params" :buscar="buscar"></header-content>
         </template>
         <template #body-content>
             <body-content :pagination="pagination" :params="params" :rows="rows" @buscar="buscar" ></body-content>

@@ -24,6 +24,7 @@ final class Reservation
 
     const STATE_PENDING = "pending";
     const STATE_APPROVED = "approved";
+    const STATE_COMPLETED = "completed";
     const STATE_CANCELED = "canceled";
 
     private function __construct(
