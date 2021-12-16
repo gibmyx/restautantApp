@@ -29,10 +29,10 @@ final class TablesGetController extends Controller
             ));
         } catch (\Exception $exception) {
             return response()->json([
-                'code' => $exception->getCode(),
+                'code' => $exception->getcode(),
                 'message' => $exception->getMessage(),
                 'rows' => []
-            ],  $exception->getCode());
+            ],  $exception->getcode());
         }
 
         return response()->json([

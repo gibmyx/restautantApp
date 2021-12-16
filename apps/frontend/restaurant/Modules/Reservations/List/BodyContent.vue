@@ -23,7 +23,7 @@
 
                         <tbody v-if="rows.length >= 1" class="list">
                         <tr v-for="row in rows">
-                            <td>MESA NUMERO # {{ row.numberTable }}</td>
+                            <td>MESA NUMERO # {{ row.codeTable }}</td>
                             <td>{{ row.userName }}</td>
                             <td># {{ row.peoples }}</td>
                             <td>{{ row.date }}</td>

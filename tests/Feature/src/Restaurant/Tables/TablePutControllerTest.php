@@ -37,7 +37,7 @@ final class TablePutControllerTest extends TestCase
         $uuidTable = Uuid::random()->value();
         $table = [
             'id' => $uuidTable,
-            'number' => 1,
+            'state' => "available",
             'maxPeople' => 5,
             'minPeople' =>  2,
             'description' => $this->faker->text
@@ -68,7 +68,7 @@ final class TablePutControllerTest extends TestCase
         $uuidTable = Uuid::random()->value();
         $table = [
             'id' => $uuidTable,
-            'number' => 1,
+            'code' => 1,
             'maxPeople' => 5,
             'minPeople' =>  2,
             'description' => $this->faker->text

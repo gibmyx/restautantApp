@@ -8,25 +8,16 @@ namespace AppRestaurant\Restaurant\Tables\Application\Update;
 
 final class TableUpdateRequest
 {
-    private $id;
-    private $number;
-    private $maxPeople;
-    private $minPeople;
-    private $description;
 
     public function __construct(
-        string $id,
-        int    $number,
-        int    $maxPeople,
-        int    $minPeople,
-        string $description
+        private string $id,
+        private string    $code,
+        private string $state,
+        private int    $maxPeople,
+        private int    $minPeople,
+        private string $description
     )
     {
-        $this->id = $id;
-        $this->number = $number;
-        $this->maxPeople = $maxPeople;
-        $this->minPeople = $minPeople;
-        $this->description = $description;
     }
 
     public function id(): string
@@ -34,9 +25,14 @@ final class TableUpdateRequest
         return $this->id;
     }
 
-    public function number(): int
+    public function code(): string
     {
-        return $this->number;
+        return $this->code;
+    }
+
+    public function state(): string
+    {
+        return $this->state;
     }
 
     public function maxPeople(): int

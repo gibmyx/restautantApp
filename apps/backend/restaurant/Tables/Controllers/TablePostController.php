@@ -30,16 +30,16 @@ final class TablePostController extends Controller
         try {
             ($this->create)(new TableCreateRequest(
                 $id,
-                (int)$request->number,
+                (string)$request->state,
                 (int)$request->maxPeople,
                 (int)$request->minPeople,
                 (string)$request->description
             ));
         } catch (\Exception $exception) {
             return response()->json([
-                'code' => $exception->getCode(),
+                'code' => $exception->getcode(),
                 'message' => $exception->getMessage(),
-            ],  $exception->getCode());
+            ],  $exception->getcode());
         }
 
         return response()->json([

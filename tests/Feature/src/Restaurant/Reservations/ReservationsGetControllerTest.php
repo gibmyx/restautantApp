@@ -66,7 +66,7 @@ final class ReservationsGetControllerTest extends TestCase
             'userId' => $user->id,
             'people' => 6,
             'date' => '2021-8-9 16:30:00',
-            'numberTable' => 1,
+            'codeTable' => 1,
             'userName' => $user->name,
         ]);
     }
@@ -75,7 +75,7 @@ final class ReservationsGetControllerTest extends TestCase
     {
         $this->post("/table/{$uuidTable}", [
             'id' => $uuidTable,
-            'number' => 1,
+            'code' => 1,
             'maxPeople' => rand(5,9),
             'minPeople' =>  rand(2,4),
             'description' => $this->faker->text

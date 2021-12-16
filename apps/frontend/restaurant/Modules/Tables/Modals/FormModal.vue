@@ -18,8 +18,8 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="input-number">Numero de mesa</label>
-                                <input type="number" min="1" pattern="^[0-9]+" id="input-number" v-model="formData.number"
+                                <label class="form-control-label" for="input-code">Numero de mesa</label>
+                                <input type="code" min="1" pattern="^[0-9]+" id="input-code" v-model="formData.code"
                                        class="form-control form-control-sm">
 
                             </div>
@@ -32,14 +32,14 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="input-max-people">Capacidad maxima </label>
-                                <input type="number" min="1" pattern="^[0-9]+" id="input-max-people" v-model="formData.maxPeople"
+                                <input type="code" min="1" pattern="^[0-9]+" id="input-max-people" v-model="formData.maxPeople"
                                        class="form-control form-control-sm">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="input-min-people">Capacidad minima</label>
-                                <input type="number" min="1" pattern="^[0-9]+" id="input-min-people" v-model="formData.minPeople"
+                                <input type="code" min="1" pattern="^[0-9]+" id="input-min-people" v-model="formData.minPeople"
                                        class="form-control form-control-sm">
                             </div>
                         </div>

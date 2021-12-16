@@ -17,7 +17,8 @@ class CreateTables extends Migration
 
         Schema::create('tables', function (Blueprint $table) {
             $table->uuid('id');
-            $table->integer('number');
+            $table->string('code');
+            $table->string('state');
             $table->integer('max_people');
             $table->integer('min_people');
             $table->string('description');

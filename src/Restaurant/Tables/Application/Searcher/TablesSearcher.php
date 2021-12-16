@@ -47,7 +47,7 @@ final class TablesSearcher
         return function ($table) {
             return new TableResponse(
                 (string)$table->id,
-                (int)$table->number,
+                (int)$table->code,
                 (int)$table->max_people,
                 (int)$table->min_people,
                 (string)$table->description,

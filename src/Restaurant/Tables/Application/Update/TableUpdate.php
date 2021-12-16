@@ -12,7 +12,8 @@ use AppRestaurant\Restaurant\Tables\Domain\ValueObject\TableDescription;
 use AppRestaurant\Restaurant\Tables\Domain\ValueObject\TableId;
 use AppRestaurant\Restaurant\Tables\Domain\ValueObject\TableMaxPeople;
 use AppRestaurant\Restaurant\Tables\Domain\ValueObject\TableMinPeople;
-use AppRestaurant\Restaurant\Tables\Domain\ValueObject\TableNumber;
+use AppRestaurant\Restaurant\Tables\Domain\ValueObject\TableCode;
+use AppRestaurant\Restaurant\Tables\Domain\ValueObject\TableState;
 
 final class TableUpdate
 {
@@ -30,7 +31,8 @@ final class TableUpdate
     {
         $table = ($this->finder)(new TableId($request->id()));
 
-        $table->changeNumber(new TableNumber($request->number()));
+        $table->changeCode(new TableCode($request->code()));
+        $table->changeState(new TableState($request->state()));
         $table->changeMaxPeople(new TableMaxPeople($request->maxPeople()));
         $table->changeMinPeople(new TableMinPeople($request->minPeople()));
         $table->changeDescription(new TableDescription($request->description()));

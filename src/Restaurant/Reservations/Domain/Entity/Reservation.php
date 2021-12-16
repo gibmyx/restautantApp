@@ -7,7 +7,7 @@ namespace AppRestaurant\Restaurant\Reservations\Domain\Entity;
 use AppRestaurant\Restaurant\Reservations\Domain\Event\ReservationCreated;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationId;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationDate;
-use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationNumberTable;
+use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationCodeTable;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationState;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationUserId;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationTableId;
@@ -21,11 +21,13 @@ use AppRestaurant\Restaurant\Shared\Domain\AggregateRoot\AggregateRoot;
 final class Reservation
 {
     const TABLE = "reservation";
+    const PREFIJO = "RES";
 
     const STATE_PENDING = "pending";
     const STATE_APPROVED = "approved";
     const STATE_COMPLETED = "completed";
     const STATE_CANCELED = "canceled";
+
 
     private function __construct(
         private ReservationId          $id,
@@ -34,7 +36,7 @@ final class Reservation
         private ReservationPeoples     $peoples,
         private ReservationDate        $date,
         private ReservationState       $state,
-        private ReservationNumberTable $numberTable,
+        private ReservationCodeTable $codeTable,
         private ReservationUserName    $userName,
         private ReservationCreatedAt   $createdAt,
         private ReservationUpdatedAt   $updatedAt
@@ -49,7 +51,7 @@ final class Reservation
         ReservationPeoples     $peoples,
         ReservationDate        $date,
         ReservationState       $state,
-        ReservationNumberTable $numberTable,
+        ReservationCodeTable $codeTable,
         ReservationUserName    $userName,
     ): self
     {
@@ -60,7 +62,7 @@ final class Reservation
             $peoples,
             $date,
             $state,
-            $numberTable,
+            $codeTable,
             $userName,
             new ReservationCreatedAt(),
             new ReservationUpdatedAt()
@@ -74,7 +76,7 @@ final class Reservation
         ReservationPeoples     $peoples,
         ReservationDate        $date,
         ReservationState       $state,
-        ReservationNumberTable $numberTable,
+        ReservationCodeTable $codeTable,
         ReservationUserName    $userName,
         ReservationCreatedAt   $createdAt,
         ReservationUpdatedAt   $updatedAt
@@ -87,7 +89,7 @@ final class Reservation
             $peoples,
             $date,
             $state,
-            $numberTable,
+            $codeTable,
             $userName,
             $createdAt,
             $updatedAt,
@@ -124,9 +126,9 @@ final class Reservation
         return $this->state;
     }
 
-    public function numberTable(): ReservationNumberTable
+    public function codeTable(): ReservationCodeTable
     {
-        return $this->numberTable;
+        return $this->codeTable;
     }
 
     public function userName(): ReservationUserName
@@ -176,12 +178,12 @@ final class Reservation
         $this->state = $newState;
     }
 
-    public function changeNumberTable(ReservationNumberTable $numberTable): void
+    public function changeCodeTable(ReservationCodeTable $codeTable): void
     {
-        if (!$this->numberTable->equals($numberTable))
+        if (!$this->codeTable->equals($codeTable))
             $this->updatedAt = new ReservationUpdatedAt();
 
-        $this->numberTable = $numberTable;
+        $this->codeTable = $codeTable;
     }
 
     public function changeUserName(ReservationUserName $userName): void

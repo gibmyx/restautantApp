@@ -34,7 +34,7 @@ final class TablesResponse
             return [
                 'id' => $table->id(),
                 'description' => $table->description(),
-                'number' => $table->number(),
+                'code' => $table->code(),
                 'maxPeople' => $table->maxPeople(),
                 'minPeople' => $table->minPeople(),
             ];

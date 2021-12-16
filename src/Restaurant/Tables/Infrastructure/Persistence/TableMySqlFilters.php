@@ -8,9 +8,9 @@ use AppRestaurant\Restaurant\Shared\Infrastructure\Persistence\MysqlQueryFilters
 
 final class TableMySqlFilters extends MysqlQueryFilters
 {
-    public function number($value):void
+    public function code($value):void
     {
-        $this->builder->where('tables.number',  $value);
+        $this->builder->where('tables.code',  $value);
     }
 
 }

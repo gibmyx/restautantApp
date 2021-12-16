@@ -15,7 +15,7 @@ final class ReservationResponse
         private int    $peoples,
         private string $date,
         private string $state,
-        private int    $numberTable,
+        private int    $codeTable,
         private string $userName,
         private string $createdAt,
         private string $updatedAt
@@ -53,9 +53,9 @@ final class ReservationResponse
         return $this->state;
     }
 
-    public function numberTable(): int
+    public function codeTable(): int
     {
-        return $this->numberTable;
+        return $this->codeTable;
     }
 
     public function userName(): string

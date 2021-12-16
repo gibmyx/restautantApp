@@ -33,7 +33,7 @@ final class ReservationPutController extends Controller
                 (int)$request->people,
                 (string)$request->date,
                 (string)$request->state,
-                (int)$request->numberTable,
+                (int)$request->codeTable,
                 (string)$request->userName,
             ));
         } catch (\Exception $exception) {

@@ -47,7 +47,7 @@ final class ReservationsResponse
                 'peoples' => $reservationResponse->peoples(),
                 'date' => $reservationResponse->date(),
                 'state' => $reservationResponse->state(),
-                'numberTable' => $reservationResponse->numberTable(),
+                'codeTable' => $reservationResponse->codeTable(),
                 'userName' => $reservationResponse->userName(),
                 'stateClass' => key_exists($reservationResponse->state(), $this->stateClass) ? $this->stateClass[$reservationResponse->state()] : '',
             ];

@@ -27,7 +27,8 @@ final class TablesPutController extends Controller
         try {
             ($this->update)(new TableUpdateRequest(
                 (string)$request->id,
-                (int)$request->number,
+                (string)$request->code,
+                (string)$request->state,
                 (int)$request->maxPeople,
                 (int)$request->minPeople,
                 (string)$request->description

@@ -1,6 +1,6 @@
 export default () =>{
     return {
         page: 1,
-        number: 1,
+        code: 1,
     }
 }

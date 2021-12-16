@@ -38,7 +38,7 @@ final class TablePostControllerTest extends TestCase
 
         $response = $this->post("/table/{$uuidTable}", [
             'id' => $uuidTable,
-            'number' => 1,
+            'state' => "available",
             'maxPeople' => rand(5,9),
             'minPeople' =>  rand(2,4),
             'description' => $this->faker->text

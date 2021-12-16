@@ -9,43 +9,35 @@ use AppRestaurant\Restaurant\Tables\Domain\ValueObject\TableDescription;
 use AppRestaurant\Restaurant\Tables\Domain\ValueObject\TableId;
 use AppRestaurant\Restaurant\Tables\Domain\ValueObject\TableMaxPeople;
 use AppRestaurant\Restaurant\Tables\Domain\ValueObject\TableMinPeople;
-use AppRestaurant\Restaurant\Tables\Domain\ValueObject\TableNumber;
+use AppRestaurant\Restaurant\Tables\Domain\ValueObject\TableCode;
+use AppRestaurant\Restaurant\Tables\Domain\ValueObject\TableState;
 use AppRestaurant\Restaurant\Tables\Domain\ValueObject\TableUpdatedAt;
 
 final class Table
 {
     const TABLE = 'tables';
+    const PREFIJO = 'TAB';
 
-    private $id;
-    private $number;
-    private $maxPeople;
-    private $minPeople;
-    private $description;
-    private $createdAt;
-    private $updatedAt;
+    const STATE_AVAILABLE = "available";
+    const STATE_OCCUPIED = "occupied";
 
     public function __construct(
-        TableId          $id,
-        TableNumber      $number,
-        TableMaxPeople   $maxPeople,
-        TableMinPeople   $minPeople,
-        TableDescription $description,
-        TableCreatedAt   $createdAt,
-        TableUpdatedAt   $updatedAt
+        private TableId          $id,
+        private TableCode        $code,
+        private TableState       $state,
+        private TableMaxPeople   $maxPeople,
+        private TableMinPeople   $minPeople,
+        private TableDescription $description,
+        private TableCreatedAt   $createdAt,
+        private TableUpdatedAt   $updatedAt
     )
     {
-        $this->id = $id;
-        $this->number = $number;
-        $this->maxPeople = $maxPeople;
-        $this->minPeople = $minPeople;
-        $this->description = $description;
-        $this->createdAt = $createdAt;
-        $this->updatedAt = $updatedAt;
     }
 
     public static function FormDataBase(
         TableId          $id,
-        TableNumber      $number,
+        TableCode        $code,
+        TableState       $state,
         TableMaxPeople   $maxPeople,
         TableMinPeople   $minPeople,
         TableDescription $description,
@@ -55,7 +47,8 @@ final class Table
     {
         return new self(
             $id,
-            $number,
+            $code,
+            $state,
             $maxPeople,
             $minPeople,
             $description,
@@ -66,7 +59,7 @@ final class Table
 
     public static function create(
         TableId          $id,
-        TableNumber      $number,
+        TableState       $state,
         TableMaxPeople   $maxPeople,
         TableMinPeople   $minPeople,
         TableDescription $description
@@ -74,7 +67,8 @@ final class Table
     {
         return new self(
             $id,
-            $number,
+            new TableCode(),
+            $state,
             $maxPeople,
             $minPeople,
             $description,
@@ -88,9 +82,14 @@ final class Table
         return $this->id;
     }
 
-    public function number(): TableNumber
+    public function code(): TableCode
     {
-        return $this->number;
+        return $this->code;
+    }
+
+    public function state(): TableState
+    {
+        return $this->state;
     }
 
     public function maxPeople(): TableMaxPeople
@@ -118,17 +117,25 @@ final class Table
         return $this->updatedAt;
     }
 
-    public function changeNumber(TableNumber $newNumber): void
+    public function changeCode(TableCode $newCode): void
     {
-        if (! $this->number->equals($newNumber))
+        if (!$this->code->equals($newCode))
             $this->updatedAt = new TableUpdatedAt();
 
-        $this->number = $newNumber;
+        $this->code = $newCode;
+    }
+
+    public function changeState(TableState $newState): void
+    {
+        if (!$this->state->equals($newState))
+            $this->updatedAt = new TableUpdatedAt();
+
+        $this->state = $newState;
     }
 
     public function changeMaxPeople(TableMaxPeople $newMaxPeople): void
     {
-        if (! $this->maxPeople->equals($newMaxPeople))
+        if (!$this->maxPeople->equals($newMaxPeople))
             $this->updatedAt = new TableUpdatedAt();
 
         $this->maxPeople = $newMaxPeople;
@@ -136,7 +143,7 @@ final class Table
 
     public function changeMinPeople(TableMinPeople $newMinPeople): void
     {
-        if (! $this->minPeople->equals($newMinPeople))
+        if (!$this->minPeople->equals($newMinPeople))
             $this->updatedAt = new TableUpdatedAt();
 
         $this->minPeople = $newMinPeople;
@@ -144,7 +151,7 @@ final class Table
 
     public function changeDescription(TableDescription $newDescription): void
     {
-        if (! $this->description->equals($newDescription))
+        if (!$this->description->equals($newDescription))
             $this->updatedAt = new TableUpdatedAt();
 
         $this->description = $newDescription;

@@ -10,7 +10,7 @@ use AppRestaurant\Restaurant\Reservations\Domain\Contract\ReservationRepository;
 use AppRestaurant\Restaurant\Reservations\Domain\Service\ReservationFinder;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationDate;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationId;
-use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationNumberTable;
+use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationCodeTable;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationPeoples;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationState;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationTableId;
@@ -37,7 +37,7 @@ final class ReservationUpdater
         $reservation->changePeoples(new ReservationPeoples($request->people()));
         $reservation->changeDate(new ReservationDate($request->date()));
         $reservation->changeState(new ReservationState($request->state()));
-        $reservation->changeNumberTable(new ReservationNumberTable($request->numberTable()));
+        $reservation->changeCodeTable(new ReservationCodeTable($request->codeTable()));
         $reservation->changeUserName(new ReservationUserName($request->userName()));
 
         $this->repository->update($reservation);

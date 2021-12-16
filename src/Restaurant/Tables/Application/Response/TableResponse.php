@@ -10,7 +10,7 @@ final class TableResponse
 {
 
     private $id;
-    private $number;
+    private $code;
     private $maxPeople;
     private $minPeople;
     private $description;
@@ -19,7 +19,7 @@ final class TableResponse
 
     public function __construct(
         string $id,
-        int    $number,
+        int    $code,
         int    $maxPeople,
         int    $minPeople,
         string $description,
@@ -28,7 +28,7 @@ final class TableResponse
     )
     {
         $this->id = $id;
-        $this->number = $number;
+        $this->code = $code;
         $this->maxPeople = $maxPeople;
         $this->minPeople = $minPeople;
         $this->description = $description;
@@ -41,9 +41,9 @@ final class TableResponse
         return $this->id;
     }
 
-    public function number(): int
+    public function code(): int
     {
-        return $this->number;
+        return $this->code;
     }
 
     public function maxPeople(): int

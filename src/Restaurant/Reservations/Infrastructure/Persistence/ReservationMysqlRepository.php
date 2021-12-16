@@ -9,29 +9,36 @@ use AppRestaurant\Restaurant\Reservations\Domain\Entity\Reservation;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationCreatedAt;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationDate;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationId;
-use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationNumberTable;
+use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationCodeTable;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationPeoples;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationState;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationTableId;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationUpdatedAt;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationUserId;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationUserName;
+use AppRestaurant\Restaurant\Shared\Infrastructure\TraitRepository;
 use Illuminate\Support\Facades\DB;
 
 final class ReservationMysqlRepository implements ReservationRepository
 {
+    use TraitRepository;
+
+    private $table = Reservation::TABLE;
+    private $prefix = Reservation::PREFIJO;
 
     public function create(Reservation $reservation): void
     {
+        $code = $this->setCodigo();
         DB::table(Reservation::TABLE)
             ->insert([
                 'id'            => $reservation->id()->value(),
+                'code'          => $code,
                 'table_id'      => $reservation->tableId()->value(),
                 'user_id'       => $reservation->userId()->value(),
                 'peoples'       => $reservation->peoples()->value(),
                 'date'          => $reservation->date()->value(),
                 'state'         => $reservation->state()->value(),
-                'number_table'  => $reservation->numberTable()->value(),
+                'code_table'    => $reservation->codeTable()->value(),
                 'user_name'     => $reservation->userName()->value(),
                 'created_at'    => $reservation->createdAt()->value(),
                 'updated_at'    => $reservation->updatedAt()->value()
@@ -61,7 +68,7 @@ final class ReservationMysqlRepository implements ReservationRepository
                 new ReservationPeoples($object->peoples),
                 new ReservationDate($object->date),
                 new ReservationState($object->state),
-                new ReservationNumberTable((int) $object->number_table),
+                new ReservationCodeTable((int) $object->code_table),
                 new ReservationUserName($object->user_name),
                 new ReservationCreatedAt($object->created_at),
                 new ReservationUpdatedAt($object->updated_at),
@@ -80,7 +87,7 @@ final class ReservationMysqlRepository implements ReservationRepository
                 'peoples'       => $reservation->peoples()->value(),
                 'date'          => $reservation->date()->value(),
                 'state'         => $reservation->state()->value(),
-                'number_table'  => $reservation->numberTable()->value(),
+                'code_table'  => $reservation->codeTable()->value(),
                 'user_name'     => $reservation->userName()->value(),
                 'created_at'    => $reservation->createdAt()->value(),
                 'updated_at'    => $reservation->updatedAt()->value()

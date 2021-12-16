@@ -18,11 +18,14 @@ class AlterTableReservationAddState extends Migration
             if (! Schema::hasColumn("reservation", "state"))
                 $table->string('state', 255)->after('date');
 
-            if (! Schema::hasColumn("reservation", "number_table"))
-                $table->string('number_table', 255)->after('state');
+            if (! Schema::hasColumn("reservation", "code_table"))
+                $table->string('code_table', 255)->after('state');
 
             if (! Schema::hasColumn("reservation", "user_name"))
-                $table->string('user_name', 255)->after('number_table');
+                $table->string('user_name', 255)->after('code_table');
+
+            if (! Schema::hasColumn("reservation", "code"))
+                $table->string('code')->after('id');
 
         });
     }
@@ -40,11 +43,14 @@ class AlterTableReservationAddState extends Migration
             if (Schema::hasColumn("reservation", "state"))
                 $table->dropColumn('state');
 
-            if (Schema::hasColumn("reservation", "number_table"))
-                $table->dropColumn('number_table');
+            if (Schema::hasColumn("reservation", "code_table"))
+                $table->dropColumn('code_table');
 
             if (Schema::hasColumn("reservation", "user_name"))
                 $table->dropColumn('user_name');
+
+            if (Schema::hasColumn("reservation", "code"))
+                $table->dropColumn('code');
 
         });
     }
