@@ -6,6 +6,7 @@ namespace AppRestaurant\Restaurant\Reservations\Infrastructure\Persistence;
 
 use AppRestaurant\Restaurant\Reservations\Domain\Contract\ReservationRepository;
 use AppRestaurant\Restaurant\Reservations\Domain\Entity\Reservation;
+use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationCode;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationCreatedAt;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationDate;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationId;
@@ -63,12 +64,13 @@ final class ReservationMysqlRepository implements ReservationRepository
             ? null
             : Reservation::FormDataBase(
                 new ReservationId($object->id),
+                new ReservationCode($object->code),
                 new ReservationTableId($object->table_id),
                 new ReservationUserId($object->user_id),
                 new ReservationPeoples($object->peoples),
                 new ReservationDate($object->date),
                 new ReservationState($object->state),
-                new ReservationCodeTable((int) $object->code_table),
+                new ReservationCodeTable($object->code_table),
                 new ReservationUserName($object->user_name),
                 new ReservationCreatedAt($object->created_at),
                 new ReservationUpdatedAt($object->updated_at),

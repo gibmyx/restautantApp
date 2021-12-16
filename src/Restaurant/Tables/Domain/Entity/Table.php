@@ -19,7 +19,7 @@ final class Table
     const PREFIJO = 'TAB';
 
     const STATE_AVAILABLE = "available";
-    const STATE_OCCUPIED = "occupied";
+    const STATE_OCCUPIED = "unavailable";
 
     public function __construct(
         private TableId          $id,

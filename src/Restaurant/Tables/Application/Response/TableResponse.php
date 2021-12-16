@@ -8,32 +8,17 @@ namespace AppRestaurant\Restaurant\Tables\Application\Response;
 
 final class TableResponse
 {
-
-    private $id;
-    private $code;
-    private $maxPeople;
-    private $minPeople;
-    private $description;
-    private $createdAt;
-    private $updatedAt;
-
     public function __construct(
-        string $id,
-        int    $code,
-        int    $maxPeople,
-        int    $minPeople,
-        string $description,
-        string $createdAt,
-        string $updatedAt
+        private string $id,
+        private string $code,
+        private string $state,
+        private int    $maxPeople,
+        private int    $minPeople,
+        private string $description,
+        private string $createdAt,
+        private string $updatedAt
     )
     {
-        $this->id = $id;
-        $this->code = $code;
-        $this->maxPeople = $maxPeople;
-        $this->minPeople = $minPeople;
-        $this->description = $description;
-        $this->createdAt = $createdAt;
-        $this->updatedAt = $updatedAt;
     }
 
     public function id(): string
@@ -41,9 +26,14 @@ final class TableResponse
         return $this->id;
     }
 
-    public function code(): int
+    public function code(): string
     {
         return $this->code;
+    }
+
+    public function state(): string
+    {
+        return $this->state;
     }
 
     public function maxPeople(): int

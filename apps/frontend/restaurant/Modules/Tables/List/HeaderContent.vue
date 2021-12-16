@@ -7,7 +7,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label class="form-control-label" for="input-min-people">Numero de mesa</label>
-                        <input type="code" min="1" pattern="^[0-9]+" id="input-min-people" v-model="params.code"
+                        <input type="text" min="1" pattern="^[0-9]+" id="input-min-people" v-model="params.code"
                                class="form-control form-control-sm">
                     </div>
                 </div>

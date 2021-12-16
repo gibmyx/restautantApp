@@ -18,13 +18,19 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="input-code">Numero de mesa</label>
-                                <input type="code" min="1" pattern="^[0-9]+" id="input-code" v-model="formData.code"
-                                       class="form-control form-control-sm">
+                                <label class="form-control-label" for="input-code">Codigo</label>
+                                <input type="text" min="1" pattern="^[0-9]+" id="input-code" v-model="formData.code"
+                                       class="form-control form-control-sm" disabled>
 
                             </div>
                         </div>
                         <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label" for="input-code">Estado</label>
+                                <select2 name="state" :options="statesOptions" :disabled="!edithMode"
+                                         v-model="formData.state" :settings="{minimumResultsForSearch: Infinity}">
+                                </select2>
+                            </div>
                         </div>
                     </div>
                     <hr class="my-2"/>
@@ -32,14 +38,14 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="input-max-people">Capacidad maxima </label>
-                                <input type="code" min="1" pattern="^[0-9]+" id="input-max-people" v-model="formData.maxPeople"
+                                <input type="number" min="1" pattern="^[0-9]+" id="input-max-people" v-model="formData.maxPeople"
                                        class="form-control form-control-sm">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-control-label" for="input-min-people">Capacidad minima</label>
-                                <input type="code" min="1" pattern="^[0-9]+" id="input-min-people" v-model="formData.minPeople"
+                                <input type="number" min="1" pattern="^[0-9]+" id="input-min-people" v-model="formData.minPeople"
                                        class="form-control form-control-sm">
                             </div>
                         </div>
@@ -81,7 +87,13 @@ export default defineComponent({
             formData: formData(),
             disableSave: false,
             edithMode: false,
+            statesOptions: [{id: "available", text: 'Disponible'}, {id: "unavailable", text: "Fuera de Servicio"}],
         }
+    },
+
+    mounted() {
+        let $searchfield = $(this).parent().find('.select2-search__field');
+        $searchfield.prop('disabled', true)
     },
 
     methods: {

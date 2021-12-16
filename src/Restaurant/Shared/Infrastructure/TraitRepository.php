@@ -16,7 +16,7 @@ trait TraitRepository
     private function getLastCodigo($year)
     {
         $code = DB::table($this->table)->where('code', 'LIKE', $this->prefix.'%')->max('code');
-        $codigo = empty($result) ? 0 : (int) str_replace($this->prefix.$year, "", $code);
+        $codigo = empty($code) ? 0 : (int) str_replace($this->prefix.$year, "", $code);
         return (string) ($codigo + 1);
     }
 }

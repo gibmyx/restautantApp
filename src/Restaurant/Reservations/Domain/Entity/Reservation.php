@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AppRestaurant\Restaurant\Reservations\Domain\Entity;
 
 use AppRestaurant\Restaurant\Reservations\Domain\Event\ReservationCreated;
+use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationCode;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationId;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationDate;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationCodeTable;
@@ -30,33 +31,35 @@ final class Reservation
 
 
     private function __construct(
-        private ReservationId          $id,
-        private ReservationTableId     $tableId,
-        private ReservationUserId      $userId,
-        private ReservationPeoples     $peoples,
-        private ReservationDate        $date,
-        private ReservationState       $state,
+        private ReservationId        $id,
+        private ReservationCode      $code,
+        private ReservationTableId   $tableId,
+        private ReservationUserId    $userId,
+        private ReservationPeoples   $peoples,
+        private ReservationDate      $date,
+        private ReservationState     $state,
         private ReservationCodeTable $codeTable,
-        private ReservationUserName    $userName,
-        private ReservationCreatedAt   $createdAt,
-        private ReservationUpdatedAt   $updatedAt
+        private ReservationUserName  $userName,
+        private ReservationCreatedAt $createdAt,
+        private ReservationUpdatedAt $updatedAt
     )
     {
     }
 
     public static function create(
-        ReservationId          $id,
-        ReservationTableId     $tableId,
-        ReservationUserId      $userId,
-        ReservationPeoples     $peoples,
-        ReservationDate        $date,
-        ReservationState       $state,
+        ReservationId        $id,
+        ReservationTableId   $tableId,
+        ReservationUserId    $userId,
+        ReservationPeoples   $peoples,
+        ReservationDate      $date,
+        ReservationState     $state,
         ReservationCodeTable $codeTable,
-        ReservationUserName    $userName,
+        ReservationUserName  $userName,
     ): self
     {
         return new self(
             $id,
+            new ReservationCode(),
             $tableId,
             $userId,
             $peoples,
@@ -70,20 +73,22 @@ final class Reservation
     }
 
     public static function FormDataBase(
-        ReservationId          $id,
-        ReservationTableId     $tableId,
-        ReservationUserId      $userId,
-        ReservationPeoples     $peoples,
-        ReservationDate        $date,
-        ReservationState       $state,
+        ReservationId        $id,
+        ReservationCode      $code,
+        ReservationTableId   $tableId,
+        ReservationUserId    $userId,
+        ReservationPeoples   $peoples,
+        ReservationDate      $date,
+        ReservationState     $state,
         ReservationCodeTable $codeTable,
-        ReservationUserName    $userName,
-        ReservationCreatedAt   $createdAt,
-        ReservationUpdatedAt   $updatedAt
+        ReservationUserName  $userName,
+        ReservationCreatedAt $createdAt,
+        ReservationUpdatedAt $updatedAt
     ): self
     {
         return new self(
             $id,
+            $code,
             $tableId,
             $userId,
             $peoples,

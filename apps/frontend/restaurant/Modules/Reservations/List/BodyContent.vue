@@ -13,7 +13,8 @@
                     <table class="table align-items-center table-flush">
                         <thead class="thead-light">
                         <tr>
-                            <th scope="col" class="sort">Numero de mesa</th>
+                            <th scope="col" class="sort">Codigo</th>
+                            <th scope="col" class="sort">Codigo Mesa</th>
                             <th scope="col" class="sort">Cliente</th>
                             <th scope="col" class="sort">Personas</th>
                             <th scope="col" class="sort">Fecha</th>
@@ -23,7 +24,8 @@
 
                         <tbody v-if="rows.length >= 1" class="list">
                         <tr v-for="row in rows">
-                            <td>MESA NUMERO # {{ row.codeTable }}</td>
+                            <td>{{ row.code }}</td>
+                            <td>{{ row.codeTable }}</td>
                             <td>{{ row.userName }}</td>
                             <td># {{ row.peoples }}</td>
                             <td>{{ row.date }}</td>

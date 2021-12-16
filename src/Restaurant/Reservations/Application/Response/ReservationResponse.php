@@ -10,12 +10,13 @@ final class ReservationResponse
 {
     public function __construct(
         private string $id,
+        private string $code,
         private string $tableId,
         private int    $userId,
         private int    $peoples,
         private string $date,
         private string $state,
-        private int    $codeTable,
+        private string    $codeTable,
         private string $userName,
         private string $createdAt,
         private string $updatedAt
@@ -26,6 +27,11 @@ final class ReservationResponse
     public function id(): string
     {
         return $this->id;
+    }
+
+    public function code(): string
+    {
+        return $this->code;
     }
 
     public function tableId(): string
@@ -53,7 +59,7 @@ final class ReservationResponse
         return $this->state;
     }
 
-    public function codeTable(): int
+    public function codeTable(): string
     {
         return $this->codeTable;
     }

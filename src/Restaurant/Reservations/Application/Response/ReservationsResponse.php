@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-
 namespace AppRestaurant\Restaurant\Reservations\Application\Response;
-
 
 use function Lambdish\Phunctional\map;
 
@@ -42,6 +40,7 @@ final class ReservationsResponse
         return map(function (ReservationResponse $reservationResponse) {
             return [
                 'id' => $reservationResponse->id(),
+                'code' => $reservationResponse->code(),
                 'tableId' => $reservationResponse->tableId(),
                 'userId' => $reservationResponse->userId(),
                 'peoples' => $reservationResponse->peoples(),

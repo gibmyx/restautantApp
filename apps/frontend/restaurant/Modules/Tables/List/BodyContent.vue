@@ -12,20 +12,27 @@
                     <table class="table align-items-center table-flush">
                         <thead class="thead-light">
                         <tr>
-                            <th scope="col" class="sort" data-sort="name">Numero de mesa</th>
+                            <th scope="col" class="sort" data-sort="name">Codigo</th>
                             <th scope="col" class="sort" data-sort="budget">Maximo de personas</th>
                             <th scope="col" class="sort" data-sort="status">Minimo de personas</th>
                             <th scope="col" class="sort" data-sort="status">Descripción</th>
+                            <th scope="col" class="sort">Estado</th>
                             <th scope="col" width="1%"></th>
                         </tr>
                         </thead>
 
                         <tbody v-if="rows.length >= 1" class="list">
                         <tr v-for="row in rows">
-                            <td>MESA NUMERO #{{row.code}}</td>
+                            <td>{{row.code}}</td>
                             <td>{{row.maxPeople}}</td>
                             <td>{{row.minPeople}}</td>
                             <td>{{row.description}}</td>
+                            <td>
+                              <span class="badge badge-dot mr-4">
+                                  <i :class="row.stateClass"></i>
+                                  <span class="status">{{ row.stateText }}</span>
+                              </span>
+                            </td>
                             <td>
                                 <div class="dropdown">
                                     <a class="btn" href="#"

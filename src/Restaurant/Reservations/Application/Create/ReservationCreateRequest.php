@@ -15,7 +15,7 @@ final class ReservationCreateRequest
         private int    $people,
         private string $date,
         private string $state,
-        private int    $codeTable,
+        private string    $codeTable,
         private string $userName
     )
     {
@@ -51,7 +51,7 @@ final class ReservationCreateRequest
         return $this->state;
     }
 
-    public function codeTable(): int
+    public function codeTable(): string
     {
         return $this->codeTable;
     }

@@ -10,7 +10,7 @@ final class TableMySqlFilters extends MysqlQueryFilters
 {
     public function code($value):void
     {
-        $this->builder->where('tables.code',  $value);
+        $this->builder->where('tables.code',  "like", "%{$value}%");
     }
 
 }

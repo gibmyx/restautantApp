@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AppRestaurant\Restaurant\Shared\Domain\ValueObject;
 
 use AppRestaurant\Restaurant\Shared\Domain\Exception\InvalidDateException;
+use DateTimeZone;
 
 class DateTimeValueObject
 {
@@ -33,7 +34,7 @@ class DateTimeValueObject
         try {
             $date = $date != 'now'
                 ? $date
-                : date('Y-m-d H:s:i');
+                : (new \DateTime())->format("Y-m-d H:i:s");
 
             $explodedDate = explode('-', $date);
 
