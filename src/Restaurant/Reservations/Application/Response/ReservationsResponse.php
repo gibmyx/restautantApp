@@ -44,7 +44,7 @@ final class ReservationsResponse
                 'tableId' => $reservationResponse->tableId(),
                 'userId' => $reservationResponse->userId(),
                 'peoples' => $reservationResponse->peoples(),
-                'date' => $reservationResponse->date(),
+                'date' => (new \DateTime($reservationResponse->date()))->format("Y-m-d H:i"),
                 'state' => $reservationResponse->state(),
                 'codeTable' => $reservationResponse->codeTable(),
                 'userName' => $reservationResponse->userName(),

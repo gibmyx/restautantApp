@@ -28,8 +28,13 @@ class MysqlQueryFilters
         return $this->builder;
     }
 
-    function getValue($value): array
+    protected function getValue($value): array
     {
         return is_array($value) ? $value : [$value];
+    }
+
+    protected function getDate($value): string
+    {
+        return (new \DateTime($value))->format("Y-m-d H:i:s");
     }
 }

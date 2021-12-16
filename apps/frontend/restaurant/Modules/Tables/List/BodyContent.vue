@@ -12,7 +12,7 @@
                     <table class="table align-items-center table-flush">
                         <thead class="thead-light">
                         <tr>
-                            <th scope="col" class="sort" data-sort="name">Codigo</th>
+                            <th scope="col" class="sort" data-sort="name">Nro de mesa</th>
                             <th scope="col" class="sort" data-sort="budget">Maximo de personas</th>
                             <th scope="col" class="sort" data-sort="status">Minimo de personas</th>
                             <th scope="col" class="sort" data-sort="status">Descripción</th>

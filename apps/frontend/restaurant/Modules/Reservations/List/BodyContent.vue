@@ -13,8 +13,8 @@
                     <table class="table align-items-center table-flush">
                         <thead class="thead-light">
                         <tr>
-                            <th scope="col" class="sort">Codigo</th>
-                            <th scope="col" class="sort">Codigo Mesa</th>
+                            <th scope="col" class="sort">Nro de reservacion</th>
+                            <th scope="col" class="sort">Nro de Mesa</th>
                             <th scope="col" class="sort">Cliente</th>
                             <th scope="col" class="sort">Personas</th>
                             <th scope="col" class="sort">Fecha</th>
