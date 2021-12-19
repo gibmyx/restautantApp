@@ -14,8 +14,10 @@ final class ReservationsResponse
     private $stateClass = [
         "pending" => "bg-warning",
         "approved" => "bg-info",
+        "to_be_confirmed" => "bg-info",
         "completed" => "bg-success",
         "canceled" => "bg-danger",
+        "incompleted" => "bg-danger",
     ];
 
     public function __construct(

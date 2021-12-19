@@ -12,61 +12,32 @@
                     <table class="table align-items-center table-flush">
                         <thead class="thead-light">
                         <tr>
-                            <th scope="col" class="sort" data-sort="name">Project</th>
-                            <th scope="col" class="sort" data-sort="budget">Budget</th>
-                            <th scope="col" class="sort" data-sort="status">Status</th>
-                            <th scope="col">Users</th>
-                            <th scope="col" class="sort" data-sort="completion">Completion</th>
-                            <th scope="col"></th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Reservaciones totales</th>
+                            <th scope="col">Completadas</th>
+                            <th scope="col">Pendientes</th>
                         </tr>
                         </thead>
-                        <tbody class="list">
 
+                        <tbody v-if="rows.length >= 1" class="list">
+                        <tr v-for="row in rows">
+                            <td>{{ row.name }}</td>
+                            <td>{{ row.email }}</td>
+                            <td># {{ row.reservations }}</td>
+                            <td># {{ row.reservationCompleted }}</td>
+                            <td># {{ row.reservationPeding }}</td>
+                        </tr>
+                        </tbody>
+
+                        <tbody v-else>
                         <tr>
-                            <th scope="row">
-                                <div class="media align-items-center">
-                                    <div class="media-body">
-                                        <span class="name mb-0 text-sm">Argon Design System</span>
-                                    </div>
-                                </div>
-                            </th>
-                            <td class="budget">
-                                $2500 USD
-                            </td>
-                            <td>
-                      <span class="badge badge-dot mr-4">
-                        <i class="bg-warning"></i>
-                        <span class="status">pending</span>
-                      </span>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <span class="completion mr-2">60%</span>
-                                    <div>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60"
-                                                 aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="text-right">
-                                <div class="dropdown">
-                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
+                            <td colspan="8">
+                                <div class="alert alert-secondary text-center" role="alert">
+                                    No se encontraron resultados
                                 </div>
                             </td>
                         </tr>
-
                         </tbody>
                     </table>
                 </div>

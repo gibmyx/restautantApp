@@ -22,12 +22,12 @@ final class ReservationMySqlFilters extends MysqlQueryFilters
     public function dateFrom($value):void
     {
         $value = $this->getDate($value);
-        $this->builder->where('reservation.code_table',  ">=", $value);
+        $this->builder->where('reservation.date',  ">=", $value);
     }
 
     public function dateTo($value):void
     {
         $value = $this->getDate($value);
-        $this->builder->where('reservation.code_table',  "<=", $value);
+        $this->builder->where('reservation.date',  "<=", $value);
     }
 }

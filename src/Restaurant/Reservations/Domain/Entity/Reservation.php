@@ -21,14 +21,17 @@ use AppRestaurant\Restaurant\Shared\Domain\AggregateRoot\AggregateRoot;
 
 final class Reservation
 {
-    const TABLE = "reservation";
+    const TABLE_NAME = "reservation";
     const PREFIJO = "RES";
 
     const STATE_PENDING = "pending";
-    const STATE_APPROVED = "approved";
-    const STATE_COMPLETED = "completed";
-    const STATE_CANCELED = "canceled";
+    const STATE_TO_BE_CONFIRMED = "to_be_confirmed";
 
+    const STATE_CANCELED = "canceled";
+    const STATE_APPROVED = "approved";
+
+    const STATE_COMPLETED = "completed";
+    const STATE_INCOMPLIED = "incompleted";
 
     private function __construct(
         private ReservationId        $id,

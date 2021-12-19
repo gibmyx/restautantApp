@@ -65,4 +65,12 @@ final class UserMysqlRepository implements UserRepository
                 new UserUpdatedAt($object->updated_at)
             );
     }
+
+    public function searcherList(array $clause)
+    {
+        $query = DB::table(user::TABLE_NAME);
+        $query = (new UserMySqlFilters($query))($clause);
+        $query->orderBy(user::TABLE_NAME.".created_at", "desc");
+        return $query->paginate(5);
+    }
 }

@@ -18,4 +18,6 @@ interface UserRepository
     public function find(UserEmail $email): ?user;
 
     public function auth(UserEmail $email, UserPassword $password): bool;
+
+    public function searcherList(array $clause);
 }

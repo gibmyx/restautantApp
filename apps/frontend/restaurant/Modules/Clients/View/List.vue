@@ -54,10 +54,10 @@ export default defineComponent({
             });
         },
         buscar() {
-            // axios.get('/reservations?'+qs.stringify(this.params)).then(response => {
-            //     this.rows = response.data.rows;
-            //     this.pagination = response.data.pagination;
-            // });
+            axios.get('/clients?'+qs.stringify(this.params)).then(response => {
+                this.rows = response.data.rows;
+                this.pagination = response.data.pagination;
+            });
         },
     }
 

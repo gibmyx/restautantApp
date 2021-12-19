@@ -7,9 +7,6 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label class="form-control-label">Numero de mesa</label>
-
-                        <select2 name="state" :options="options">
-                        </select2>
                     </div>
                 </div>
             </div>

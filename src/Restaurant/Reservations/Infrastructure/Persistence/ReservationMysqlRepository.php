@@ -24,13 +24,13 @@ final class ReservationMysqlRepository implements ReservationRepository
 {
     use TraitRepository;
 
-    private $table = Reservation::TABLE;
+    private $table = Reservation::TABLE_NAME;
     private $prefix = Reservation::PREFIJO;
 
     public function create(Reservation $reservation): void
     {
         $code = $this->setCodigo();
-        DB::table(Reservation::TABLE)
+        DB::table(Reservation::TABLE_NAME)
             ->insert([
                 'id'            => $reservation->id()->value(),
                 'code'          => $code,
@@ -48,7 +48,7 @@ final class ReservationMysqlRepository implements ReservationRepository
 
     public function searcherList(array $clause)
     {
-        $query = DB::table(Reservation::TABLE);
+        $query = DB::table(Reservation::TABLE_NAME);
         $query = (new ReservationMySqlFilters($query))($clause);
         $query->orderBy('created_at', 'desc');
         return $query->paginate(5);
@@ -56,7 +56,7 @@ final class ReservationMysqlRepository implements ReservationRepository
 
     public function find(ReservationId $id): ?Reservation
     {
-        $object = DB::table(Reservation::TABLE)
+        $object = DB::table(Reservation::TABLE_NAME)
             ->where('id', $id->value())
             ->first();
 
@@ -79,7 +79,7 @@ final class ReservationMysqlRepository implements ReservationRepository
 
     public function update(Reservation $reservation): void
     {
-        DB::table(Reservation::TABLE)
+        DB::table(Reservation::TABLE_NAME)
             ->where('id', $reservation->id()->value())
             ->take(1)
             ->update([
