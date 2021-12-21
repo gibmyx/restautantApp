@@ -12,16 +12,10 @@
                         </div>
                         <div class="col">
                             <ul class="nav nav-pills justify-content-end">
-                                <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales-dark" data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}' data-prefix="$" data-suffix="k">
+                                <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales-dark" data-update='{"data":{"datasets":[{"data":[0, 0, 0, 0, 0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}' data-prefix="#" data-suffix="k">
                                     <a href="#" class="nav-link py-2 px-3 active" data-toggle="tab">
-                                        <span class="d-none d-md-block">Month</span>
+                                        <span class="d-none d-md-block">Actualizar</span>
                                         <span class="d-md-none">M</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item" data-toggle="chart" data-target="#chart-sales-dark" data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}' data-prefix="$" data-suffix="k">
-                                    <a href="#" class="nav-link py-2 px-3" data-toggle="tab">
-                                        <span class="d-none d-md-block">Week</span>
-                                        <span class="d-md-none">W</span>
                                     </a>
                                 </li>
                             </ul>
@@ -120,7 +114,7 @@ export default {
                             ticks: {
                                 callback: function(value) {
                                     if (!(value % 10)) {
-                                        return '$' + value + 'k';
+                                        return '#' + value ;
                                     }
                                 }
                             }
@@ -137,17 +131,17 @@ export default {
                                     content += '<span class="popover-body-label mr-auto">' + label + '</span>';
                                 }
 
-                                content += '<span class="popover-body-value">$' + yLabel + 'k</span>';
+                                content += '#' + yLabel;
                                 return content;
                             }
                         }
                     }
                 },
                 data: {
-                    labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                     datasets: [{
                         label: 'Performance',
-                        data: [0, 20, 10, 30, 15, 40, 20, 60, 60]
+                        data: [0, 0, 0, 0, 20, 10, 30, 15, 40, 20, 60, 90]
                     }]
                 }
             });

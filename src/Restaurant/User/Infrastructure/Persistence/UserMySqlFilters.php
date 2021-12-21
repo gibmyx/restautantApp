@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 final class UserMySqlFilters extends MysqlQueryFilters
 {
 
-    public function origin($value):void
+    public function origin($value): void
     {
         if ($value == "mobile")
             $this->getQueryMobile();
@@ -20,7 +20,7 @@ final class UserMySqlFilters extends MysqlQueryFilters
             $this->getQueryWeb();
     }
 
-    private function getQueryMobile()
+    private function getQueryMobile(): void
     {
         $this->builder->where("users.origin", "=", "mobile")
             ->leftJoin("reservation", "reservation.user_id", "=", "users.id")
@@ -30,7 +30,7 @@ final class UserMySqlFilters extends MysqlQueryFilters
             })
             ->leftJoin("reservation as reservationPeding", function (JoinClause $query) {
                 $query->on("reservationCompleted.user_id", "=", "users.id")
-                    ->whereIn("reservationCompleted.state",  ["pending", "to_be_confirmed", "approved"]);
+                    ->whereIn("reservationCompleted.state", ["pending", "to_be_confirmed", "approved"]);
             })
             ->groupBy("users.id")
             ->select([
@@ -44,9 +44,21 @@ final class UserMySqlFilters extends MysqlQueryFilters
 
     }
 
-    private function getQueryWeb()
+    private function getQueryWeb(): void
     {
 
+    }
+
+    public function startCreatedAt($value): void
+    {
+        $value = $this->getDate($value);
+        $this->builder->where("users.created_at", ">=", $value);
+    }
+
+    public function endCreatedAt($value): void
+    {
+        $value = $this->getDate($value);
+        $this->builder->where("users.created_at", "<=", $value);
     }
 
 }

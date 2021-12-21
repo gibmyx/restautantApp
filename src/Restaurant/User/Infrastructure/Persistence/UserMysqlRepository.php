@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AppRestaurant\Restaurant\User\Infrastructure\Persistence;
 
+use AppRestaurant\Restaurant\Dashboard\Domain\Entity\DashboardInformationHeader;
 use AppRestaurant\Restaurant\User\Domain\Contract\UserRepository;
 use AppRestaurant\Restaurant\User\Domain\Entity\User;
 use AppRestaurant\Restaurant\User\Domain\ValueObject\UserCreatedAt;
@@ -37,9 +38,9 @@ final class UserMysqlRepository implements UserRepository
     public function existsEmail(UserEmail $email, UserOrigin $origin): bool
     {
         return DB::table(User::TABLE_NAME)
-            ->where('email', $email->value())
-            ->where('origin', $origin->value())
-            ->get()->count() > 0;
+                ->where('email', $email->value())
+                ->where('origin', $origin->value())
+                ->get()->count() > 0;
     }
 
     public function auth(UserEmail $email, UserPassword $password): bool
@@ -70,7 +71,27 @@ final class UserMysqlRepository implements UserRepository
     {
         $query = DB::table(user::TABLE_NAME);
         $query = (new UserMySqlFilters($query))($clause);
-        $query->orderBy(user::TABLE_NAME.".created_at", "desc");
+        $query->orderBy(user::TABLE_NAME . ".created_at", "desc");
         return $query->paginate(5);
+    }
+
+    public function searcherInformationHeader(DashboardInformationHeader $informationHeader): array
+    {
+        $queryLast = DB::table(user::TABLE_NAME);
+        $queryLast = (new UserMySqlFilters($queryLast))([
+            "startCreatedAt" => $informationHeader->startLastMonth(),
+            "endCreatedAt" => $informationHeader->endLastMonth()
+        ]);
+
+        $queryCurrent = DB::table(user::TABLE_NAME);
+        $queryCurrent = (new UserMySqlFilters($queryCurrent))([
+            "startCreatedAt" => $informationHeader->startCurrentMonth(),
+            "endCreatedAt" => $informationHeader->endCurrentMonth()
+        ]);
+
+        return [
+            "currentMonth" => $queryCurrent->where("users.origin", "=", "mobile")->count(),
+            "lastMonth" => $queryLast->where("users.origin", "=", "mobile")->count(),
+        ];
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AppRestaurant\Restaurant\Reservations\Infrastructure\Persistence;
 
+use AppRestaurant\Restaurant\Dashboard\Domain\Entity\DashboardInformationHeader;
 use AppRestaurant\Restaurant\Reservations\Domain\Contract\ReservationRepository;
 use AppRestaurant\Restaurant\Reservations\Domain\Entity\Reservation;
 use AppRestaurant\Restaurant\Reservations\Domain\ValueObject\ReservationCode;
@@ -32,17 +33,17 @@ final class ReservationMysqlRepository implements ReservationRepository
         $code = $this->setCodigo();
         DB::table(Reservation::TABLE_NAME)
             ->insert([
-                'id'            => $reservation->id()->value(),
-                'code'          => $code,
-                'table_id'      => $reservation->tableId()->value(),
-                'user_id'       => $reservation->userId()->value(),
-                'peoples'       => $reservation->peoples()->value(),
-                'date'          => $reservation->date()->value(),
-                'state'         => $reservation->state()->value(),
-                'code_table'    => $reservation->codeTable()->value(),
-                'user_name'     => $reservation->userName()->value(),
-                'created_at'    => $reservation->createdAt()->value(),
-                'updated_at'    => $reservation->updatedAt()->value()
+                'id' => $reservation->id()->value(),
+                'code' => $code,
+                'table_id' => $reservation->tableId()->value(),
+                'user_id' => $reservation->userId()->value(),
+                'peoples' => $reservation->peoples()->value(),
+                'date' => $reservation->date()->value(),
+                'state' => $reservation->state()->value(),
+                'code_table' => $reservation->codeTable()->value(),
+                'user_name' => $reservation->userName()->value(),
+                'created_at' => $reservation->createdAt()->value(),
+                'updated_at' => $reservation->updatedAt()->value()
             ]);
     }
 
@@ -83,16 +84,39 @@ final class ReservationMysqlRepository implements ReservationRepository
             ->where('id', $reservation->id()->value())
             ->take(1)
             ->update([
-                'id'            => $reservation->id()->value(),
-                'table_id'      => $reservation->tableId()->value(),
-                'user_id'       => $reservation->userId()->value(),
-                'peoples'       => $reservation->peoples()->value(),
-                'date'          => $reservation->date()->value(),
-                'state'         => $reservation->state()->value(),
-                'code_table'  => $reservation->codeTable()->value(),
-                'user_name'     => $reservation->userName()->value(),
-                'created_at'    => $reservation->createdAt()->value(),
-                'updated_at'    => $reservation->updatedAt()->value()
+                'id' => $reservation->id()->value(),
+                'table_id' => $reservation->tableId()->value(),
+                'user_id' => $reservation->userId()->value(),
+                'peoples' => $reservation->peoples()->value(),
+                'date' => $reservation->date()->value(),
+                'state' => $reservation->state()->value(),
+                'code_table' => $reservation->codeTable()->value(),
+                'user_name' => $reservation->userName()->value(),
+                'created_at' => $reservation->createdAt()->value(),
+                'updated_at' => $reservation->updatedAt()->value()
             ]);
+    }
+
+    public function searcherInformationHeader(DashboardInformationHeader $informationHeader, string $state = ''): array
+    {
+
+        $queryLast = DB::table(Reservation::TABLE_NAME);
+        $queryLast = (new ReservationMySqlFilters($queryLast))([
+            "startCreatedAt" => $informationHeader->startLastMonth(),
+            "endCreatedAt" => $informationHeader->endLastMonth(),
+            "state" => $state,
+        ]);
+
+        $queryCurrent = DB::table(Reservation::TABLE_NAME);
+        $queryCurrent = (new ReservationMySqlFilters($queryCurrent))([
+            "startCreatedAt" => $informationHeader->startCurrentMonth(),
+            "endCreatedAt" => $informationHeader->endCurrentMonth(),
+            "state" => $state,
+        ]);
+
+        return [
+            "currentMonth" => $queryCurrent->count(),
+            "lastMonth" => $queryLast->count(),
+        ];
     }
 }
