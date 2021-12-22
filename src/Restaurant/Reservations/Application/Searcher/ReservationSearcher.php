@@ -24,7 +24,7 @@ final class ReservationSearcher
 
     public function __invoke(ReservationSearcherRequest $request): ReservationsResponse
     {
-        $result = $this->repository->searcherList($request->filters());
+        $result = $this->repository->searcherList($request->filters(), $request->limit());
 
         $response = new ReservationsResponse(...map(
             $this->toResponse(),

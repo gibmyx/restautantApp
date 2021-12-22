@@ -8,17 +8,19 @@ namespace AppRestaurant\Restaurant\Reservations\Application\Searcher;
 
 final class ReservationSearcherRequest
 {
-    private $filters;
-
     public function __construct(
-        array $filters
-    )
-    {
-        $this->filters = $filters;
+        private array $filters,
+        private int $limit,
+    ) {
     }
 
     public function filters(): array
     {
         return $this->filters;
+    }
+
+    public function limit(): int
+    {
+        return $this->limit;
     }
 }

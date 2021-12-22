@@ -18,7 +18,7 @@ interface ReservationRepository
 
     public function create(Reservation $reservation): void;
 
-    public function searcherList(array $clause);
+    public function searcherList(array $clause, int $limit);
 
     public function searcherInformationHeader(DashboardInformationHeader $informationHeader, string $state): array;
 }

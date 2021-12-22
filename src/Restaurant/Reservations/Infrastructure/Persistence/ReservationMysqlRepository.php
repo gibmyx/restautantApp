@@ -47,12 +47,12 @@ final class ReservationMysqlRepository implements ReservationRepository
             ]);
     }
 
-    public function searcherList(array $clause)
+    public function searcherList(array $clause, int $limit)
     {
         $query = DB::table(Reservation::TABLE_NAME);
         $query = (new ReservationMySqlFilters($query))($clause);
         $query->orderBy('created_at', 'desc');
-        return $query->paginate(5);
+        return $query->paginate($limit);
     }
 
     public function find(ReservationId $id): ?Reservation

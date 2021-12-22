@@ -4,7 +4,7 @@
             <header-content :informationHeaderData="informationHeaderData"></header-content>
         </template>
         <template #body-content>
-            <body-content></body-content>
+            <body-content :reservations="reservations"></body-content>
         </template>
     </app-layout>
 </template>
@@ -15,6 +15,9 @@ import {defineComponent} from "vue";
 import AppLayout from "@/Components/AppLayout";
 import HeaderContent from "@/Modules/Dashboard/List/HeaderContent";
 import BodyContent from "@/Modules/Dashboard/List/BodyContent";
+import informationHeaderData from "@/Modules/Dashboard/Data/informationHeaderData";
+import qs from "qs";
+import moment from "moment";
 
 export default defineComponent({
     name: "Dashboard",
@@ -27,38 +30,16 @@ export default defineComponent({
 
     data() {
       return {
-          informationHeaderData: {
-              newUser: {
-                  currentMonth: 0,
-                  isPositive: true,
-                  lastMonth: 0,
-                  porcentaje: 0,
-              },
-              reservation: {
-                  currentMonth: 0,
-                  isPositive: true,
-                  lastMonth: 0,
-                  porcentaje: 0,
-              },
-              reservationsCanceled: {
-                  currentMonth: 0,
-                  isPositive: true,
-                  lastMonth: 0,
-                  porcentaje: 0,
-              },
-              reservationsCompleted: {
-                  currentMonth: 0,
-                  isPositive: true,
-                  lastMonth: 0,
-                  porcentaje: 0,
-              },
-          },
+          reservations: [],
+          informationHeaderData: informationHeaderData(),
       }
     },
 
     mounted() {
         this.init()
         this.informationHeader()
+        this.informationChart()
+        this.informationReservationTodayConfirmated()
     },
 
     methods: {
@@ -71,9 +52,75 @@ export default defineComponent({
             });
         },
         informationHeader() {
+            let params = {
+                page: 1,
+                limit: 100,
+                filter: {
+                    state: 'approved',
+                    dateFrom: moment().startOf('day').format('YYYY-MM-DD HH:mm:ss'),
+                    dateTo: moment().endOf('day').format('YYYY-MM-DD HH:mm:ss'),
+                }
+            };
+
+            axios.get('/reservations?'+qs.stringify(params)).then(response => {
+                this.reservations = response.data.rows;
+            });
+        },
+        informationReservationTodayConfirmated() {
             axios.get('/dashboard/information').then(response => {
                 this.informationHeaderData = response.data.data
             });
+        },
+        informationChart() {
+            let $chart = $('#chart-sales-dark');
+
+            let salesChart = new Chart($chart, {
+                type: 'line',
+                options: {
+                    scales: {
+                        yAxes: [{
+                            gridLines: {
+                                lineWidth: 1,
+                                color: Charts.colors.gray[900],
+                                zeroLineColor: Charts.colors.gray[900]
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    if (!(value % 1)) {
+                                        return '#' + value ;
+                                    }
+                                }
+                            }
+                        }]
+                    },
+                    tooltips: {
+                        callbacks: {
+                            label: function(item, data) {
+                                var label = data.datasets[item.datasetIndex].label || '';
+                                var yLabel = item.yLabel;
+                                var content = '';
+
+                                if (data.datasets.length > 1) {
+                                    content += '<span class="popover-body-label mr-auto">' + label + '</span>';
+                                }
+
+                                content += '#' + yLabel;
+                                return content;
+                            }
+                        }
+                    }
+                },
+                data: {
+                    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'Performance',
+                        data: [0, 0, 0, 0, 1, 2, 4, 5, 3, 5, 6, 90]
+                    }]
+                }
+            });
+
+            // Save to jQuery object
+            $chart.data('chart', salesChart);
         },
     }
 })

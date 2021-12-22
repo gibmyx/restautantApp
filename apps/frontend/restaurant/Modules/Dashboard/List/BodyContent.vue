@@ -8,14 +8,13 @@
 
                         <div class="col">
                             <h6 class="text-light text-uppercase ls-1 mb-1">Overview</h6>
-                            <h5 class="h3 text-white mb-0">Sales value</h5>
+                            <h5 class="h3 text-white mb-0">Historico reservaciones completadas</h5>
                         </div>
                         <div class="col">
                             <ul class="nav nav-pills justify-content-end">
-                                <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales-dark" data-update='{"data":{"datasets":[{"data":[0, 0, 0, 0, 0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}' data-prefix="#" data-suffix="k">
-                                    <a href="#" class="nav-link py-2 px-3 active" data-toggle="tab">
-                                        <span class="d-none d-md-block">Actualizar</span>
-                                        <span class="d-md-none">M</span>
+                                <li class="nav-item mr-2 mr-md-0">
+                                    <a href="#" class="nav-link py-2 px-3 active btn btn-sm btn-primary" data-toggle="tab">
+                                        <span class="d-block">Update</span>
                                     </a>
                                 </li>
                             </ul>
@@ -41,43 +40,42 @@
                 <div class="card-header border-0">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h3 class="mb-0">Social traffic</h3>
+                            <h3 class="mb-0">Reservaciones Confirmada para hoy</h3>
                         </div>
                         <div class="col text-right">
-                            <a href="#!" class="btn btn-sm btn-primary">See all</a>
+                            <a href="#!" class="btn btn-sm btn-primary">Update</a>
                         </div>
                     </div>
                 </div>
-                <div class="table-responsive">
+                <div class="table-responsive" style="max-height: 395px;">
                     <!-- Projects table -->
                     <table class="table align-items-center table-flush">
                         <thead class="thead-light">
                         <tr>
-                            <th scope="col">Referral</th>
-                            <th scope="col">Visitors</th>
-                            <th scope="col"></th>
+                            <th scope="col">Codigo</th>
+                            <th scope="col">Mesa</th>
+                            <th scope="col">Nombre</th>
                         </tr>
                         </thead>
-                        <tbody>
+
+                        <tbody v-if="reservations.length >= 1" class="list">
+                        <tr v-for="row in reservations">
+                            <td>{{ row.code }}</td>
+                            <td>{{ row.codeTable }}</td>
+                            <td>{{ row.userName }}</td>
+                        </tr>
+                        </tbody>
+
+                        <tbody v-else>
                         <tr>
-                            <th scope="row">
-                                Facebook
-                            </th>
-                            <td>
-                                1,480
-                            </td>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <span class="mr-2">60%</span>
-                                    <div>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-                                        </div>
-                                    </div>
+                            <td colspan="3">
+                                <div class="alert alert-secondary text-center" role="alert">
+                                    No se encontraron resultados
                                 </div>
                             </td>
                         </tr>
                         </tbody>
+
                     </table>
                 </div>
             </div>
@@ -92,63 +90,16 @@
 export default {
     name: "BodyContent",
 
+    props: {
+        reservations: {
+            type: Array,
+            required: true,
+        },
+    },
     mounted() {
-        let $chart = $('#chart-sales-dark');
-        if ($chart.length)
-            this.init($chart);
     },
 
     methods: {
-        init($chart){
-
-            let salesChart = new Chart($chart, {
-                type: 'line',
-                options: {
-                    scales: {
-                        yAxes: [{
-                            gridLines: {
-                                lineWidth: 1,
-                                color: Charts.colors.gray[900],
-                                zeroLineColor: Charts.colors.gray[900]
-                            },
-                            ticks: {
-                                callback: function(value) {
-                                    if (!(value % 10)) {
-                                        return '#' + value ;
-                                    }
-                                }
-                            }
-                        }]
-                    },
-                    tooltips: {
-                        callbacks: {
-                            label: function(item, data) {
-                                var label = data.datasets[item.datasetIndex].label || '';
-                                var yLabel = item.yLabel;
-                                var content = '';
-
-                                if (data.datasets.length > 1) {
-                                    content += '<span class="popover-body-label mr-auto">' + label + '</span>';
-                                }
-
-                                content += '#' + yLabel;
-                                return content;
-                            }
-                        }
-                    }
-                },
-                data: {
-                    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    datasets: [{
-                        label: 'Performance',
-                        data: [0, 0, 0, 0, 20, 10, 30, 15, 40, 20, 60, 90]
-                    }]
-                }
-            });
-
-            // Save to jQuery object
-            $chart.data('chart', salesChart);
-        }
     }
 }
 </script>

@@ -25,7 +25,8 @@ final class ReservationsGetController extends Controller
     {
         try {
             $response = ($this->searcher)(new ReservationSearcherRequest(
-                $request->all()
+                $request->filter,
+                (int) $request->limit,
             ));
         } catch (\Exception $exception) {
             return response()->json([

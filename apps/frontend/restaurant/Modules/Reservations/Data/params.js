@@ -1,9 +1,12 @@
-export default () =>{
+export default () => {
     return {
         page: 1,
-        code: "",
-        codeTable: "",
-        dateFrom: "",
-        dateTo: "",
+        limit: 5,
+        filter: {
+            code: "",
+            codeTable: "",
+            dateFrom: "",
+            dateTo: "",
+        }
     }
 }

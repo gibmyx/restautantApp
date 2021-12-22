@@ -7,7 +7,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label class="form-control-label" for="input-code">Nro de reservacion</label>
-                        <input type="text" min="1" pattern="^[0-9]+" id="input-code" v-model="params.code"
+                        <input type="text" min="1" pattern="^[0-9]+" id="input-code" v-model="params.filter.code"
                                class="form-control form-control-sm">
                     </div>
                 </div>
@@ -19,7 +19,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label class="form-control-label" for="input-codeTable">Nro de reservacion</label>
-                        <input type="text" min="1" pattern="^[0-9]+" id="input-codeTable" v-model="params.codeTable"
+                        <input type="text" min="1" pattern="^[0-9]+" id="input-codeTable" v-model="params.filter.codeTable"
                                class="form-control form-control-sm">
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label class="form-control-label" for="input-dateFrom">Fecha desde</label>
-                        <input type="datetime-local" min="1" pattern="^[0-9]+" id="input-dateFrom" v-model="params.dateFrom"
+                        <input type="datetime-local" min="1" pattern="^[0-9]+" id="input-dateFrom" v-model="params.filter.dateFrom"
                                class="form-control form-control-sm">
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label class="form-control-label" for="input-dateTo">Fecha hasta</label>
-                        <input type="datetime-local" min="1" pattern="^[0-9]+" id="input-dateTo" v-model="params.dateTo"
+                        <input type="datetime-local" min="1" pattern="^[0-9]+" id="input-dateTo" v-model="params.filter.dateTo"
                                class="form-control form-control-sm">
                     </div>
                 </div>
