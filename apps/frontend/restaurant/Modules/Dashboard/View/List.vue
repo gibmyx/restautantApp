@@ -48,18 +48,18 @@ export default defineComponent({
             let body = $('body');
 
             body.off('click', '.uptade').on('click', '.uptade', function () {
-                context.informationReservationTodayConfirmated();
+                context.informationReservationTodayConfirmated(true);
             });
 
             body.off('click', '.updateHistoricoCompeltado').on('click', '.updateHistoricoCompeltado', function () {
-                context.informationChart();
+                context.informationChart(true);
             });
 
             body.off('click', '.updateReservaConfirmada').on('click', '.updateReservaConfirmada', function () {
-                context.informationReservationTodayConfirmated();
+                context.informationReservationTodayConfirmated(true);
             });
         },
-        informationHeader() {
+        informationHeader(toast = false) {
             let params = {
                 page: 1,
                 limit: 100,
@@ -72,14 +72,20 @@ export default defineComponent({
 
             axios.get('/reservations?'+qs.stringify(params)).then(response => {
                 this.reservations = response.data.rows;
+
+                if (toast)
+                    this.$toast.success("Informacion actualizada", {duration: 5000, position: "top-right"});
             });
         },
-        informationReservationTodayConfirmated() {
+        informationReservationTodayConfirmated(toast = false) {
             axios.get('/dashboard/information').then(response => {
                 this.informationHeaderData = response.data.data
+
+                if (toast)
+                    this.$toast.success("Informacion actualizada", {duration: 5000, position: "top-right"});
             });
         },
-        informationChart() {
+        informationChart(toast = false) {
             axios.get('/reservations/history').then(response => {
 
                 let historyCount = response.data.historyCount;
@@ -132,6 +138,9 @@ export default defineComponent({
                 });
                 // Save to jQuery object
                 $chart.data('chart', salesChart);
+
+                if (toast)
+                    this.$toast.success("Informacion actualizada", {duration: 5000, position: "top-right"});
             });
         },
     }
