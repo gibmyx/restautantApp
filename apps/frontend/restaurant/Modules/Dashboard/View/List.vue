@@ -48,7 +48,15 @@ export default defineComponent({
             let body = $('body');
 
             body.off('click', '.uptade').on('click', '.uptade', function () {
-                context.informationHeader();
+                context.informationReservationTodayConfirmated();
+            });
+
+            body.off('click', '.updateHistoricoCompeltado').on('click', '.updateHistoricoCompeltado', function () {
+                context.informationChart();
+            });
+
+            body.off('click', '.updateReservaConfirmada').on('click', '.updateReservaConfirmada', function () {
+                context.informationReservationTodayConfirmated();
             });
         },
         informationHeader() {
@@ -72,55 +80,59 @@ export default defineComponent({
             });
         },
         informationChart() {
-            let $chart = $('#chart-sales-dark');
+            axios.get('/reservations/history').then(response => {
 
-            let salesChart = new Chart($chart, {
-                type: 'line',
-                options: {
-                    scales: {
-                        yAxes: [{
-                            gridLines: {
-                                lineWidth: 1,
-                                color: Charts.colors.gray[900],
-                                zeroLineColor: Charts.colors.gray[900]
-                            },
-                            ticks: {
-                                callback: function(value) {
-                                    if (!(value % 1)) {
-                                        return '#' + value ;
+                let historyCount = response.data.historyCount;
+                let historyMonths = response.data.historyMonths;
+
+                let $chart = $('#chart-sales-dark');
+                let salesChart = new Chart($chart, {
+                    type: 'line',
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                gridLines: {
+                                    lineWidth: 1,
+                                    color: Charts.colors.gray[900],
+                                    zeroLineColor: Charts.colors.gray[900]
+                                },
+                                ticks: {
+                                    callback: function(value) {
+                                        if (!(value % 1)) {
+                                            return '#' + value ;
+                                        }
                                     }
                                 }
-                            }
-                        }]
-                    },
-                    tooltips: {
-                        callbacks: {
-                            label: function(item, data) {
-                                var label = data.datasets[item.datasetIndex].label || '';
-                                var yLabel = item.yLabel;
-                                var content = '';
+                            }]
+                        },
+                        tooltips: {
+                            callbacks: {
+                                label: function(item, data) {
+                                    var label = data.datasets[item.datasetIndex].label || '';
+                                    var yLabel = item.yLabel;
+                                    var content = '';
 
-                                if (data.datasets.length > 1) {
-                                    content += '<span class="popover-body-label mr-auto">' + label + '</span>';
+                                    if (data.datasets.length > 1) {
+                                        content += '<span class="popover-body-label mr-auto">' + label + '</span>';
+                                    }
+
+                                    content += '#' + yLabel;
+                                    return content;
                                 }
-
-                                content += '#' + yLabel;
-                                return content;
                             }
                         }
+                    },
+                    data: {
+                        labels: historyMonths,
+                        datasets: [{
+                            label: 'Performance',
+                            data: historyCount
+                        }]
                     }
-                },
-                data: {
-                    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    datasets: [{
-                        label: 'Performance',
-                        data: [0, 0, 0, 0, 1, 2, 4, 5, 3, 5, 6, 90]
-                    }]
-                }
+                });
+                // Save to jQuery object
+                $chart.data('chart', salesChart);
             });
-
-            // Save to jQuery object
-            $chart.data('chart', salesChart);
         },
     }
 })

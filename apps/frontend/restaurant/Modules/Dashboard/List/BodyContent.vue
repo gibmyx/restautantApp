@@ -14,7 +14,7 @@
                             <ul class="nav nav-pills justify-content-end">
                                 <li class="nav-item mr-2 mr-md-0">
                                     <a href="#" class="nav-link py-2 px-3 active btn btn-sm btn-primary" data-toggle="tab">
-                                        <span class="d-block">Update</span>
+                                        <span class="d-block updateHistoricoCompeltado">Update</span>
                                     </a>
                                 </li>
                             </ul>
@@ -43,7 +43,7 @@
                             <h3 class="mb-0">Reservaciones Confirmada para hoy</h3>
                         </div>
                         <div class="col text-right">
-                            <a href="#!" class="btn btn-sm btn-primary">Update</a>
+                            <a href="#!" class="btn btn-sm btn-primary updateReservaConfirmada">Update</a>
                         </div>
                     </div>
                 </div>

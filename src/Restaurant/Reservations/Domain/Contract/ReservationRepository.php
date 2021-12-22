@@ -21,4 +21,6 @@ interface ReservationRepository
     public function searcherList(array $clause, int $limit);
 
     public function searcherInformationHeader(DashboardInformationHeader $informationHeader, string $state): array;
+
+    public function searcherHistory(\DateTime $startMonth, string $state): int;
 }
