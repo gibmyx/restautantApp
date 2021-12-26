@@ -52,6 +52,16 @@
 export default {
     name: "Topnav",
 
+    data () {
+        return {
+            urlApp: null
+        }
+    },
+
+    mounted() {
+        this.urlApp = process.env.MIX_APP_URL;
+    },
+
     computed: {
 
         getBreadcrumb() {
@@ -94,7 +104,7 @@ export default {
 
     methods: {
         logout() {
-            this.$inertia.post(`${urlApp}/logout`);
+            this.$inertia.post(`${this.urlApp}/logout`);
         },
     },
 }
