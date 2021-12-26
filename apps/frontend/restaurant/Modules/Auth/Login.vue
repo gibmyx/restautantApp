@@ -120,7 +120,7 @@ export default defineComponent({
     },
     components: {
         HeaderComponent,
-        BodyComponent
+        BodyComponent,
     }
 })
 </script>
