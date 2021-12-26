@@ -6,5 +6,7 @@ module.exports = {
             '@': path.resolve('apps/frontend/restaurant'),
         },
     },
-    https: true
+    devServer: {
+        https: true
+    },
 };
