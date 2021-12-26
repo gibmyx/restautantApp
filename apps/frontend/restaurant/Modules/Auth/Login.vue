@@ -4,7 +4,7 @@
         <template #header_right>
             <ul class="navbar-nav align-items-lg-center ml-lg-auto">
                 <li class="nav-item">
-                    <inertia-link :href="route('Welcome')" class="nav-link">
+                    <inertia-link :href="`${urlApp}`" class="nav-link">
                         <i class="ni ni-shop"></i><span class="nav-link-inner--text">Home</span>
                     </inertia-link>
                 </li>
@@ -83,6 +83,7 @@ export default defineComponent({
     },
 
     mounted() {
+        this.urlApp = process.env.MIX_APP_URL;
 
         let body = $("body");
 
@@ -96,7 +97,8 @@ export default defineComponent({
                 email: '',
                 password: '',
                 remember: false
-            })
+            }),
+            urlApp: null
         }
     },
 
@@ -108,7 +110,7 @@ export default defineComponent({
                     ...data,
                     remember: this.form.remember ? 'on' : ''
                 }))
-                .post(this.route('login'), {
+                .post(`${urlApp}/login`, {
 
                     onFailure: (e) => {
                         this.$toast.success("Solicitud realizada con exito", {duration: 5000, position: "top-right"});
