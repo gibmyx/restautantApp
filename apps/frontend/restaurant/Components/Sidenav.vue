@@ -19,25 +19,25 @@
                     <hr class="my-3">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <inertia-link :href="route('dashboard')" class="nav-link" :class=" this.route().current('dashboard') ? 'active': ''">
+                            <inertia-link :href="`${urlApp}/dashboard`" class="nav-link" :class=" this.route().current('dashboard') ? 'active': ''">
                                 <i class="fas fa-home text-primary"></i>
                                 <span class="nav-link-text">Dashboard</span>
                             </inertia-link>
                         </li>
                         <li class="nav-item">
-                            <inertia-link :href="route('tables.list')" class="nav-link" :class=" this.route().current('tables.list') ? 'active': ''">
+                            <inertia-link :href="`${urlApp}/tables/list`" class="nav-link" :class=" this.route().current('tables.list') ? 'active': ''">
                                 <i class="ni ni-bullet-list-67 text-default"></i>
                                 <span class="nav-link-text">Mesas</span>
                             </inertia-link>
                         </li>
                         <li class="nav-item">
-                            <inertia-link :href="route('reservations.list')" class="nav-link" :class=" this.route().current('reservations.list') ? 'active': ''">
+                            <inertia-link :href="`${urlApp}/reservations/list`" class="nav-link" :class=" this.route().current('reservations.list') ? 'active': ''">
                                 <i class="ni ni-collection text-info"></i>
                                 <span class="nav-link-text">Reservaciones</span>
                             </inertia-link>
                         </li>
                         <li class="nav-item">
-                            <inertia-link :href="route('clients.list')" class="nav-link" :class=" this.route().current('clients.list') ? 'active': ''">
+                            <inertia-link :href="`${urlApp}/clients/list`" class="nav-link" :class=" this.route().current('clients.list') ? 'active': ''">
                                 <i class="ni ni-single-02 text-yellow"></i>
                                 <span class="nav-link-text">Clientes</span>
                             </inertia-link>
@@ -56,6 +56,16 @@ import {defineComponent} from "vue";
 
 export default defineComponent({
     name: "Dashboard",
+
+    data () {
+        return {
+            urlApp: null
+        }
+    },
+
+    mounted() {
+        this.urlApp = process.env.MIX_APP_URL;
+    },
 
     components: {
 
