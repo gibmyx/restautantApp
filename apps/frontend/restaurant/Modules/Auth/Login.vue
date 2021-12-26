@@ -110,7 +110,7 @@ export default defineComponent({
                     ...data,
                     remember: this.form.remember ? 'on' : ''
                 }))
-                .post(`${urlApp}/login`, {
+                .post(`${this.urlApp}/login`, {
 
                     onFailure: (e) => {
                         this.$toast.success("Solicitud realizada con exito", {duration: 5000, position: "top-right"});
