@@ -30,7 +30,7 @@
                             <div class="dropdown-header noti-title">
                                 <h6 class="text-overflow m-0">Welcome!</h6>
                             </div>
-                            <inertia-link :href="route('user.profile')" class="dropdown-item">
+                            <inertia-link :href="`${urlApp}/user/profile`" class="dropdown-item">
                                 <i class="ni ni-single-02"></i>
                                 <span class="nav-link-text">Mi perfil</span>
                             </inertia-link>
@@ -94,7 +94,7 @@ export default {
 
     methods: {
         logout() {
-            this.$inertia.post(route('logout'));
+            this.$inertia.post(`${urlApp}/logout`);
         },
     },
 }
