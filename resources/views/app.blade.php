@@ -10,10 +10,10 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{asset('css/nucleo/css/nucleo.css')}}">
-        <link rel="stylesheet" href="{{asset('css/@fortawesome/fontawesome-free/css/all.min.css')}}">
-        <link rel="stylesheet" href="{{asset('css/argon.css')}}">
-        <link rel="stylesheet" href="{{asset('css/animate.min.css')}}">
+        <link rel="stylesheet" href="{{asset('css/nucleo/css/nucleo.css',  env("APP_PRODUCTION"))}}">
+        <link rel="stylesheet" href="{{asset('css/@fortawesome/fontawesome-free/css/all.min.css',  env("APP_PRODUCTION"))}}">
+        <link rel="stylesheet" href="{{asset('css/argon.css',  env("APP_PRODUCTION"))}}">
+        <link rel="stylesheet" href="{{asset('css/animate.min.css',  env("APP_PRODUCTION"))}}">
 
         <!-- Scripts -->
         @routes
@@ -22,13 +22,13 @@
     <body class="bg-default">
         @inertia
 
-        <script src="{{asset("js/vendor/jquery.min.js") }}"></script>
-        <script src="{{asset("js/vendor/bootstrap.bundle.min.js") }}"></script>
-        <script src="{{asset("js/vendor/js.cookie.js") }}"></script>
-        <script src="{{asset("js/vendor/jquery.scrollbar.min.js") }}"></script>
-        <script src="{{asset("js/vendor/jquery-scrollLock.min.js") }}"></script>
-        <script src="{{asset("js/vendor/Chart.min.js") }}"></script>
-        <script src="{{asset("js/vendor/Chart.extension.js") }}"></script>
-        <script src="{{asset("js/vendor/argon.js?v=1.2.0") }}"></script>
+        <script src="{{asset("js/vendor/jquery.min.js", env("APP_PRODUCTION")) }}"></script>
+        <script src="{{asset("js/vendor/bootstrap.bundle.min.js",  env("APP_PRODUCTION")) }}"></script>
+        <script src="{{asset("js/vendor/js.cookie.js",  env("APP_PRODUCTION")) }}"></script>
+        <script src="{{asset("js/vendor/jquery.scrollbar.min.js",  env("APP_PRODUCTION")) }}"></script>
+        <script src="{{asset("js/vendor/jquery-scrollLock.min.js",  env("APP_PRODUCTION")) }}"></script>
+        <script src="{{asset("js/vendor/Chart.min.js",  env("APP_PRODUCTION")) }}"></script>
+        <script src="{{asset("js/vendor/Chart.extension.js",  env("APP_PRODUCTION")) }}"></script>
+        <script src="{{asset("js/vendor/argon.js?v=1.2.0",  env("APP_PRODUCTION")) }}"></script>
     </body>
 </html>
