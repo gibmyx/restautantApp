@@ -32,7 +32,7 @@ final class ClientsGetController extends Controller
                 'line' => $exception->getLine(),
                 'trace' => $exception->getTrace(),
                 'rows' => []
-            ], $exception->getCode());
+            ], 404);
         }
 
         return response()->json([
