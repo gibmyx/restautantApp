@@ -11,10 +11,10 @@ class DateTimeValueObject
 {
     private $date;
 
-    public function __construct(string $date = 'now')
+    public function __construct(string $date = 'now', string $format = 'Y-m-d H:i:s')
     {
         $this->setTimezone();
-        $this->date = $this->setDate($date);
+        $this->date = $this->setDate($date, $format);
     }
 
     public static function createFromFormat(string $format, string $dateTime): self
@@ -29,23 +29,17 @@ class DateTimeValueObject
         );
     }
 
-    private function setDate(string $date): string
+    private function setDate(string $date, string $format): string
     {
         try {
             $date = $date != 'now'
-                ? $date
-                : (new \DateTime())->format("Y-m-d H:i:s");
+                ? \DateTime::createFromFormat($format, $date)
+                : (new \DateTime());
 
-            $explodedDate = explode('-', $date);
-
-            if (!checkdate(
-                (int)$explodedDate[1],
-                (int)$explodedDate[2],
-                (int)$explodedDate[0]
-            ))
+            if ($date && $date->format($format) == $date)
                 throw new InvalidDateException('The given date time is invalid', 400);
 
-            return $date;
+            return $date->format($format);
         } catch (\Exception $e) {
             throw new InvalidDateException("The given date time {$date} is invalid", 400);
         }
