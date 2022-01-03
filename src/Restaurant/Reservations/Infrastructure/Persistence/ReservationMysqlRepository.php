@@ -124,8 +124,8 @@ final class ReservationMysqlRepository implements ReservationRepository
     {
         $queryCurrent = DB::table(Reservation::TABLE_NAME);
         $queryCurrent = (new ReservationMySqlFilters($queryCurrent))([
-            "dateFrom" => $dateFrom,
-            "dateTo" => $dateTo,
+            "startCreatedAt" => $dateFrom,
+            "endCreatedAt" => $dateTo,
             "state" => $state,
             "userId" => $userId,
         ]);

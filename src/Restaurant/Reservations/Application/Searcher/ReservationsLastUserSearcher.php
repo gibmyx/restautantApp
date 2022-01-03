@@ -17,7 +17,7 @@ final class ReservationsLastUserSearcher
 
     public function __invoke(ReservationsLastUserSearcherRequest $request): array
     {
-        $startMonth = (new \DateTime())->format("Y-01-01");
+        $startMonth = (new \DateTime())->format("Y-01-01 00:00:00");
         $endMonth = (new \DateTime())->format("Y-m-t 23:59:59");
 
         $reservationsTotal = $this->repository->searcherHistory($startMonth, $endMonth, "", $request->userId());
