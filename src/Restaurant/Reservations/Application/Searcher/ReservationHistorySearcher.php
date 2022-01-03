@@ -37,7 +37,7 @@ final class ReservationHistorySearcher
         $startMonth = (new \DateTime($startMonth));
         $endMonth = (new \DateTime($endMonth));
 
-        $resul = $this->repository->searcherHistory($startMonth, Reservation::STATE_COMPLETED);
+        $resul = $this->repository->searcherHistory($startMonth->format("Y-m-d 00:00:00"), $startMonth->format("Y-m-t 23:59:59"), Reservation::STATE_COMPLETED);
 
         $this->history = array_merge([$resul], $this->history);
         $this->months = array_merge([$startMonth->format("M")], $this->months);

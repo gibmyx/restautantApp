@@ -120,13 +120,14 @@ final class ReservationMysqlRepository implements ReservationRepository
         ];
     }
 
-    public function searcherHistory(\DateTime $startMonth, string $state = ''): int
+    public function searcherHistory(string $dateFrom, string $dateTo, string $state = '', ?int $userId = null): int
     {
         $queryCurrent = DB::table(Reservation::TABLE_NAME);
         $queryCurrent = (new ReservationMySqlFilters($queryCurrent))([
-            "dateFrom" => $startMonth->format("Y-m-d 00:00:00"),
-            "dateTo" => $startMonth->format("Y-m-t 23:59:59"),
+            "dateFrom" => $dateFrom,
+            "dateTo" => $dateTo,
             "state" => $state,
+            "userId" => $userId,
         ]);
         return $queryCurrent->count();
     }
