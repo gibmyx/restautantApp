@@ -53,7 +53,7 @@ final class ReservationsGetControllerTest extends TestCase
         $this->create_table($uuidTable);
         $this->create_reservation($uuid, $uuidTable, $user);
 
-        $response = $this->getJson('/reservations');
+        $response = $this->getJson('/reservations?page=1&limit=100&filter%5BuserId%5D=3');
 
         $response->assertStatus(JsonResponse::HTTP_OK);
     }

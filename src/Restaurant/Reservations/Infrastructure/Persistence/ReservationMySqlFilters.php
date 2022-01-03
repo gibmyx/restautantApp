@@ -9,6 +9,11 @@ use AppRestaurant\Restaurant\Shared\Infrastructure\Persistence\MysqlQueryFilters
 final class ReservationMySqlFilters extends MysqlQueryFilters
 {
 
+    public function userId($value): void
+    {
+        $this->builder->where('reservation.user_id', "=", $value);
+    }
+
     public function code($value): void
     {
         $this->builder->where('reservation.code', "like", "%{$value}%");
